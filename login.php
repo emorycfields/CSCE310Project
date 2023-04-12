@@ -20,6 +20,7 @@ include "db_connection.php";
 
     if ($row['password'] === $password) {
       echo "\nCorrect password";
+      header("Location: register.php");
     }else{
       echo "\nIncorrect password. Please try again";
     }
