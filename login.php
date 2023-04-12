@@ -6,23 +6,32 @@ include "db_connection.php";
     $email = $_POST['email'];
     $password = $_POST['password'];
     
-    $sql = "SELECT `password` FROM `Users` WHERE `email`='" .$email. "' LIMIT 1";
+    
+    $user_sql = "SELECT * FROM `Users` WHERE `email`='" .$email. "'";
+    $user_check = $conn->query($user_sql);
 
-    $password_check = $conn->query($sql);
+    if ($user_check == FALSE) {
+        echo "Error:". $user_sql . "<br>". $conn->error;
+    } 
+
+    $password_sql = "SELECT `password` FROM `Users` WHERE `email`='" .$email. "' LIMIT 1";
+    $password_check = $conn->query($password_sql);
+    
     
     if ($password_check == FALSE) {
-        echo "Error:". $sql . "<br>". $conn->error;
+        echo "Error:". $password_sql . "<br>". $conn->error;
     }
     
     $conn->close();
     $row = mysqli_fetch_array($password_check);
     
 
-    if ($row['password'] === $password) {
-      echo "\nCorrect password";
-      header("Location: register.php");
+    if (mysqli_num_rows($user_check) > 0 and $row['password'] == $password) {
+        echo "Correct password";
+        header("Location: register.php");
+        
     }else{
-      echo "\nIncorrect password. Please try again";
+        echo "Incorrect email or password. Try again.";
     }
     
   } 
