@@ -14,8 +14,8 @@
 function CloseCon($conn)
  {
  $conn -> close();
- }
-   */
+ }*/
+   
     $servername = "localhost";
     $username = "root";
     $password = "t(Ij1DXiSPW8w*SY";
