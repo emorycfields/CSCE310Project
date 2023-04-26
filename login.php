@@ -14,7 +14,7 @@ include "db_connection.php";
         echo "Error:". $user_sql . "<br>". $conn->error;
     } 
 
-    $password_sql = "SELECT `password` FROM `Users` WHERE `email`='" .$email. "' LIMIT 1";
+    $password_sql = "SELECT `password`,`userid` FROM `Users` WHERE `email`='" .$email. "' LIMIT 1";
     $password_check = $conn->query($password_sql);
     
     
@@ -28,7 +28,8 @@ include "db_connection.php";
 
     if (mysqli_num_rows($user_check) > 0 and $row['password'] == $password) {
         echo "Correct password";
-        header("Location: register.php");
+        //echo $row['userid'];
+        header("Location: home.php?userid=".$row['userid']);
         
     }else{
         echo "Incorrect email or password. Try again.";
