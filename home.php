@@ -23,8 +23,8 @@
                   </a>
               </div>
               <div class="card bg-light" style = "width: 30rem; height: 10rem ">
-                  <a class="card-block stretched-link text-decoration-none" href = "register.php" style="color:black">
-                      <h3 align="center" >Add User</h3>
+                  <a class="card-block stretched-link text-decoration-none" href = "adduser.php" style="color:black">
+                      <h3 align="center" >Users</h3>
                   </a>
               </div>
           </div>
