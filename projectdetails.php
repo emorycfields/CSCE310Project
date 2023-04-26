@@ -1,5 +1,5 @@
 <?php
-    $var_value = $_GET['proj_id'];
+    $var_value = $_GET['varname'];
 
     include "db_connection.php";
 
@@ -39,7 +39,7 @@
 
 <h2 align="center"> Items </h2>
 <a href="newitem.php">
-    <button type="button" class="btn btn-primary" style=" left: 30">
+    <button type="button" class="btn btn-primary" style="position: relative; left:1895;">
         <i style="font-size: 2em; " class="glyphicon glyphicon-plus"></i>
     </button>
 </a>
@@ -55,10 +55,10 @@
 </div>
 
 <br>
-<h2 align="center"> Comments/Status Updates </h2>
+<h2 align="center"> Comments/Status </h2>
 
-<a href="newcomment.php?proj_id=<?php echo $var_value ?>">
-    <button type="button" class="btn btn-primary" >
+<a href="newcomment.php">
+    <button type="button" class="btn btn-primary" style="position: relative; left:1895;">
         <i style="font-size: 2em; " class="glyphicon glyphicon-plus"></i>
     </button>
 </a>
