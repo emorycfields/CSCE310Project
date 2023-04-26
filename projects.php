@@ -1,7 +1,6 @@
 <?php
     include "db_connection.php";
-
-    $title= 'Web Develop'; 
+    
     // SQL query to select data from database
     $sql = " SELECT
                 projects.project_id,
@@ -44,7 +43,7 @@
             <div class="card-columns-fluid">
                 <div class="card bg-light" style = "width: 30rem; height: 30rem " >
                     <div class="card-body">
-                        <a class="card-block stretched-link text-decoration-none" href="projectdetails.php?varname=<?php echo $row['project_id'] ?>" style="color:black">
+                        <a class="card-block stretched-link text-decoration-none" href="projectdetails.php?proj_id=<?php echo $row['project_id'] ?>" style="color:black">
                             <h3> Project: </h3>
                             <h4>Name: <?php echo $row['project_name']?> <br> ID: <?php echo $row['project_id']?></h4> 
                             <h3>  Manager: </h3>

@@ -35,12 +35,11 @@ include "db_connection.php";
     <h1 align="left"> Create a New Project </h1>  
 </head>
 
-<body> 
+<body style="text-align: center;"> 
 <form action="projects.php" method="POST">
   <fieldset>
-    <legend>Information:</legend>
     Project Manager ID:<br>
-    <input type="text" name="user_id">
+    <input type="text" name="user_id" >
     <br>
     Project Name:<br>
     <input type="text" name="project_name">
