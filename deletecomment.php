@@ -3,13 +3,14 @@
 
     $comment_id = $_GET['comment_id'];
     $proj_id = $_GET['proj_id'];
+    $user_id = $_GET['userid'];
     $sql = "DELETE FROM comment_status WHERE comment_id=$comment_id LIMIT 1";
 
     $result = $conn->query($sql);
             
             if ($result == TRUE) {
             echo "New project created successfully.";
-            header("Location: projectdetails.php?proj_id=$proj_id");
+            header("Location: projectdetails.php?proj_id=$proj_id&userid=$userid");
             }else{
             echo "Error:". $sql . "<br>". $conn->error;
             }

@@ -2,8 +2,6 @@
 
 include "db_connection.php";
   if (isset($_POST['submit'])) {
-    $first_name = $_POST['firstname'];
-    $last_name = $_POST['lastname'];
     $user_id = $_POST['userid'];
     
     $sql = "DELETE FROM `Users` WHERE `userid`='" .$user_id. "'";
@@ -27,12 +25,6 @@ include "db_connection.php";
   <fieldset>
     <legend>Information:</legend>
     
-    First name:<br>
-    <input type="text" name="firstname">
-    <br>
-    Last name:<br>
-    <input type="text" name="lastname">
-    <br>
     User ID:<br>
     <input type="text" name="userid">
     <br>

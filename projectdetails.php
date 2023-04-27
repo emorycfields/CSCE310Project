@@ -1,5 +1,6 @@
 <?php
     $var_value = $_GET['proj_id'];
+    $user_id = $_GET['userid'];
 
     include "db_connection.php";
 
@@ -31,7 +32,7 @@
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
-        <a href="home.php">
+        <a href="home.php?userid=<?php echo $user_id ?>">
             <button type="button" class="btn btn-primary" style="position:absolute; top:0; right:0;">
                 <i style="font-size: 2em; " class="glyphicon glyphicon-home"></i>
             </button>
@@ -45,7 +46,7 @@
 </html>
 
 <h2 align="center"> Items </h2>
-<a href="newitem.php">
+<a href="newitem.php?userid=<?php echo $user_id?>">
     <button type="button" class="btn btn-primary" style=" left: 30">
         <i style="font-size: 2em; " class="glyphicon glyphicon-plus"></i>
     </button>
@@ -64,7 +65,7 @@
 <br>
 <h2 align="center"> Comments/Statuses </h2>
 
-<a href="newcomment.php?proj_id=<?php echo $var_value ?>">
+<a href="newcomment.php?proj_id=<?php echo $var_value ?>&userid=<?php echo $user_id?>">
     <button type="button" class="btn btn-primary" >
         <i style="font-size: 2em; " class="glyphicon glyphicon-plus"></i>
     </button>
@@ -84,8 +85,8 @@
                             <br>
                             <h4>Author: <?php echo $row['first_name']?>  <?php echo $row['last_name']?></h4>
                             <h4><?php echo $row['time']?> <?php echo $row['date']?> </h4>
-                            <button onclick="window.location.href='deletecomment.php?comment_id=<?php echo $row['comment_id']?>&proj_id=<?php echo $var_value?>'"> DELETE </button>
-                            <button onclick="window.location.href='editcomment.php?comment_id=<?php echo $row['comment_id']?>&proj_id=<?php echo $var_value?>'"> EDIT </button>
+                            <button onclick="window.location.href='deletecomment.php?comment_id=<?php echo $row['comment_id']?>&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>'"> DELETE </button>
+                            <button onclick="window.location.href='editcomment.php?comment_id=<?php echo $row['comment_id']?>&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>'"> EDIT </button>
                         </div>
                     </div>
                 </div>

@@ -17,7 +17,7 @@
     
     if ($result == TRUE) {
       echo "New record created successfully.";
-      header("Location: home.php?userid=".$user_id);
+      header("Location: home.php?userid=$user_id");
     }else{
       echo "Error:". $sql . "<br>". $conn->error;
     }

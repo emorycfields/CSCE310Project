@@ -1,3 +1,7 @@
+<?php 
+  $user_id = $_GET['userid'];
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,18 +17,18 @@
       <div class="card-deck-wrapper">
           <div class="card-deck ">
               <div class="card  bg-light" style = "width: 30rem; height: 10rem ">
-                  <a class="card-block stretched-link text-decoration-none" href = "projects.php" style="color:black">
+                  <a class="card-block stretched-link text-decoration-none" href = "projects.php?userid=<?php echo $user_id ?>" style="color:black">
                       <h3 align="center">Projects</h3>
                   </a>
               </div>
               <div class="card bg-light" style = "width: 30rem; height: 10rem ">
-                  <a class="card-block stretched-link text-decoration-none" href="schedule.php" style="color:black">
+                  <a class="card-block stretched-link text-decoration-none" href="schedule.php?userid=<?php echo $user_id ?>" style="color:black">
                       <h3 align="center">Schedule</h3>
                   </a>
               </div>
               <div class="card bg-light" style = "width: 30rem; height: 10rem ">
-                  <a class="card-block stretched-link text-decoration-none" href = "adduser.php" style="color:black">
-                      <h3 align="center" >Add User</h3>
+                  <a class="card-block stretched-link text-decoration-none" href = "adduser.php?userid=<?php echo $user_id ?>" style="color:black">
+                      <h3 align="center" >Users</h3>
                   </a>
               </div>
           </div>
