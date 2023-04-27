@@ -13,6 +13,7 @@ include "db_connection.php";
     
     if ($result == TRUE) {
       echo "New project created successfully.";
+      header("Location: projects.php");
     }else{
       echo "Error:". $sql . "<br>". $conn->error;
     }
@@ -36,7 +37,7 @@ include "db_connection.php";
 </head>
 
 <body> 
-<form action="projects.php" method="POST">
+<form action="" method="POST">
   <fieldset>
     <legend>Information:</legend>
     Project Manager ID:<br>

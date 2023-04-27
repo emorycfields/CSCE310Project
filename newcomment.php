@@ -1,22 +1,24 @@
 <?php 
+    date_default_timezone_set('America/Chicago');
     $proj_id = $_GET['proj_id'];
 
     include "db_connection.php";
     if (isset($_POST['submit'])) {
         $user_id = $_POST['user_id'];
         $project_id = $proj_id;
-        $time = date("h:i:sa");
-        $date = date("m/d/Y");
+        $time = date("h:i:s");
+        $date = date("Y-m-d");
         $description = $_POST['comment'];
         $status = $_POST['status'];
         
-        $sql = "INSERT INTO `comment_status`(`user_id`, `project_id`, `time`, `date`, `description`, `approval_status`) 
-            VALUES ('$user_id', '$project_id','$time', '$date', '$description', '$status')";
+        $sql = "INSERT INTO `comment_status`(`user_id`, `project_id`, `description`, `date`, `time`, `approval_status`) 
+            VALUES ('$user_id', '$project_id', '$description', '$date', '$time', '$status')";
         
         $result = $conn->query($sql);
         
         if ($result == TRUE) {
         echo "New project created successfully.";
+        header("Location: projectdetails.php?proj_id=$proj_id");
         }else{
         echo "Error:". $sql . "<br>". $conn->error;
         }
@@ -33,14 +35,14 @@
                 <i style="font-size: 2em; " class="glyphicon glyphicon-home"></i>
             </button>
         </a>
-        <h1 align="center"> Add New Comment & Status Update </h1>
+        <h1 align="center"> Add New Comment & Status </h1>
         <br>
     </head>
 </html>
 
 
 <body style="text-align: center;"> 
-<form action="projectdetails.php?proj_id=<?php echo $proj_id?>" method="POST">
+<form action="" method="POST">
   <fieldset>
     user_id:<br>
     <input type="text" name="user_id">

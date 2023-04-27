@@ -1,7 +1,7 @@
 <?php 
-$user_id = $_GET['userid'];
+  $user_id = $_GET['userid'];
 
-include "db_connection.php";
+  include "db_connection.php";
   if (isset($_POST['submit'])) {
     $supervisor = $_POST['supervisor'];
     $first_name = $_POST['firstname'];
@@ -10,7 +10,7 @@ include "db_connection.php";
     $email = $_POST['email'];
     $password = $_POST['password'];
     
-    $sql = "INSERT INTO `Users`(`supervisor`, `firstname`, `lastname`, `level`, `email`, `password`) 
+    $sql = "INSERT INTO `Users`(`supervisor`, `first_name`, `last_name`, `level`, `email`, `password`) 
            VALUES ('$supervisor', '$first_name','$last_name', '$level', '$email','$password')";
     
     $result = $conn->query($sql);

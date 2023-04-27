@@ -18,6 +18,20 @@
             LIMIT 1; ";
     $result = $conn->query($sql);
     $result = mysqli_fetch_array($result);
+
+    $sql = " SELECT
+                comment_status.comment_id, 
+                comment_status.description, 
+                comment_status.date, 
+                comment_status.time, 
+                comment_status.approval_status, 
+                users.first_name, 
+                users.last_name
+            FROM
+                comment_status
+            INNER JOIN users on users.user_id = comment_status.user_id
+            WHERE project_id = $var_value;";
+    $result2 = $conn->query($sql);
 ?> 
 
 <html>
@@ -55,7 +69,7 @@
 </div>
 
 <br>
-<h2 align="center"> Comments/Status Updates </h2>
+<h2 align="center"> Comments/Statuses </h2>
 
 <a href="newcomment.php?proj_id=<?php echo $var_value ?>">
     <button type="button" class="btn btn-primary" >
@@ -63,12 +77,26 @@
     </button>
 </a>
 
-<div class="col d-flex justify-content-center">
-    <div class="card-columns-fluid mx-auto">
-        <div class="card bg-light" style = "width: 150rem; height: 30rem " >
-            <div class="card-body">
-               
+<div class="container">
+    <div class="row-fluid ">
+        <?php while ( $row = mysqli_fetch_array($result2) ) : ?>
+            <div class="col-sm-4 ">
+                <div class="card-columns-fluid">
+                    <div class="card bg-light" style = "width: 30rem; height: 35rem " >
+                        <div class="card-body">
+                            <h3>Comment: </h3>
+                                <h4> <?php echo $row['description']?> </h4>
+                            <h3>Status: </h3>
+                                <h4> <?php echo $row['approval_status']?> </h4>
+                            <br>
+                            <h4>Author: <?php echo $row['first_name']?>  <?php echo $row['last_name']?></h4>
+                            <h4><?php echo $row['time']?> <?php echo $row['date']?> </h4>
+                            <button onclick="window.location.href='deletecomment.php?comment_id=<?php echo $row['comment_id']?>&proj_id=<?php echo $var_value?>'"> DELETE </button>
+                            <button onclick="window.location.href='editcomment.php?comment_id=<?php echo $row['comment_id']?>&proj_id=<?php echo $var_value?>'"> EDIT </button>
+                        </div>
+                    </div>
+                </div>
             </div>
+        <?php endwhile; ?>
         </div>
     </div>
-</div>
