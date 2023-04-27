@@ -5,16 +5,9 @@
 
     // SQL query to select data from database
     $sql = " SELECT
-                projects.project_id,
-                users.user_id,
-                projects.project_name,
-                users.first_name,
-                users.last_name, 
-                projects.start_date
-            FROM
-                users
-            INNER JOIN projects ON projects.user_id = users.user_id
-            WHERE projects.project_id = $var_value
+                *
+            FROM projects_users
+            WHERE project_id = $var_value
             LIMIT 1; ";
     $result = $conn->query($sql);
     $result = mysqli_fetch_array($result);
