@@ -1,6 +1,8 @@
 <?php 
 
-include "db_connection.php";
+  include "db_connection.php";
+  $userid = $_GET['userid'];
+
   if (isset($_POST['submit'])) {
     $user_id = $_POST['user_id'];
     $project_name = $_POST['project_name'];
@@ -13,6 +15,7 @@ include "db_connection.php";
     
     if ($result == TRUE) {
       echo "New project created successfully.";
+      header("Location: projects.php?userid=$userid");
     }else{
       echo "Error:". $sql . "<br>". $conn->error;
     }
@@ -27,7 +30,7 @@ include "db_connection.php";
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
-        <a href="home.php">
+        <a href="home.php?userid=<?php echo $userid?>">
             <button type="button" class="btn btn-primary" style="position:absolute; top:0; right:0;">
                 <i style="font-size: 2em; " class="glyphicon glyphicon-home"></i>
             </button>
@@ -35,10 +38,9 @@ include "db_connection.php";
     <h1 align="left"> Create a New Project </h1>  
 </head>
 
-<body> 
-<form action="projects.php" method="POST">
+<body style="text-align: center;"> 
+<form action="" method="POST">
   <fieldset>
-    <legend>Information:</legend>
     Project Manager ID:<br>
     <input type="text" name="user_id">
     <br>
