@@ -26,6 +26,19 @@
             INNER JOIN users on users.user_id = comment_status.user_id
             WHERE project_id = $var_value;";
     $result2 = $conn->query($sql);
+
+    $sql = " SELECT
+                users.first_name, 
+                users.last_name, 
+                users.user_id, 
+                users.supervisor,
+                users.level, 
+                users.email
+            FROM
+                `project assignments`
+            INNER JOIN users on users.user_id = `project assignments`.user_id
+            WHERE `project assignments`.project_id = $var_value;";
+    $result3 = $conn->query($sql);
 ?> 
 
 <html>
@@ -94,3 +107,46 @@
         <?php endwhile; ?>
         </div>
     </div>
+<br>
+
+
+<h2 align="center"> Users </h2>
+
+<a href="addusertoproject.php?proj_id=<?php echo $var_value ?>&userid=<?php echo $user_id?>">
+    <button type="button" class="btn btn-primary" >
+        <i style="font-size: 2em; " class="glyphicon glyphicon-plus"></i>
+    </button>
+</a>
+
+<div>
+    <table id="editableTable" class="table table-bordered">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Supervisor</th>
+                <th>First Name</th>
+                <th>Last Name</th>	
+                <th>Level</th>
+                <th>Email</th>
+                <th>Delete</th>													
+            </tr>
+        </thead>
+        <a href = "projects.php" >
+            <tbody>
+                <?php while( $users = mysqli_fetch_assoc($result3) ) { ?>
+                <tr id="<?php echo $users ['user_id']; ?>">
+                <td><?php echo $users ['user_id']; ?></td>
+                <td><?php echo $users ['supervisor']; ?></td>
+                <td><?php echo $users ['first_name']; ?></td>
+                <td><?php echo $users ['last_name']; ?></td>  
+                <td><?php echo $users ['level']; ?></td>  
+                <td><?php echo $users ['email']; ?></td>
+                <td>
+                    <a href="deleteuserfromproject.php?todelete=<?php echo $users['user_id']?>&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>">Delete</a>
+                </td> 				   				   				  
+                </tr>
+                <?php } ?>
+            </tbody>
+        </a>
+    </table>
+</div>
