@@ -37,8 +37,8 @@
                       <h3 align="center">Schedule</h3>
                   </a>
               </div>
-              <?php if ($row['level'] == "admin"){?>
-              <div class="card bg-light" style = "width: 30rem; height: 10rem ">
+              <?php if ($row['level'] == 1){?>
+              <div class="card bg-light" style = "width: 30rem; height: 7rem ">
                   <a class="card-block stretched-link text-decoration-none" href = "users.php?userid=<?php echo $user_id ?>" style="color:black">
                       <h3 align="center" >Users</h3>
                   </a>
