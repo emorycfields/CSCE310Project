@@ -1,20 +1,23 @@
 <?php 
 
 include "db_connection.php";
+  $delete_user = $_GET['todelete'];
   if (isset($_POST['submit'])) {
-    $user_id = $_POST['userid'];
     
-    $sql = "DELETE FROM `Users` WHERE `userid`='" .$user_id. "'";
+    
+    $sql = "DELETE FROM `Users` WHERE `userid`='" .$delete_user. "'";
     
     $result = $conn->query($sql);
     
     if ($result == TRUE) {
       echo "New record deleted successfully.";
+      header("Location: users.php");
     }else{
       echo "Error:". $sql . "<br>". $conn->error;
     }
     $conn->close();
-  } 
+  }
+
 ?> 
 
 <!DOCTYPE html>
@@ -25,9 +28,7 @@ include "db_connection.php";
   <fieldset>
     <legend>Information:</legend>
     
-    User ID:<br>
-    <input type="text" name="userid">
-    <br>
+    <input type="submit" name="submit" value="submit">
   </fieldset>
 </form> 
 </body>
