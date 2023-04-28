@@ -2,12 +2,20 @@
     include "db_connection.php";
 
     
-    $sql = "SELECT `userid`, `supervisor`, `firstname`, `lastname`, `level`, `email` FROM `Users`";
+   
+    $sql = "SELECT
+            user1.userid, 
+            supervisorname.firstname as SupFirst,
+            supervisorname.lastname as SupLast,
+            user1.firstname, 
+            user1.lastname,
+            user1.level,
+            user1.email
+        FROM
+            users AS user1
+        INNER JOIN users AS supervisorname on user1.supervisor = supervisorname.userid;";
+    
     $result = $conn->query($sql);
-
-    if (isset($_POST['delete'])) {
-
-    }
 ?> 
 
 <!DOCTYPE html>
@@ -45,10 +53,12 @@
         </thead>
         <a href = "projects.php" >
             <tbody>
-                <?php while( $users = mysqli_fetch_assoc($result) ) { ?>
+                <?php while( $users = mysqli_fetch_assoc($result) ) { 
+
+                    ?>
                 <tr id="<?php echo $users ['userid']; ?>">
                 <td><?php echo $users ['userid']; ?></td>
-                <td><?php echo $users ['supervisor']; ?></td>
+                <td><?php echo $users ['SupFirst']; ?> <?php echo $users ['SupLast']; ?></td>
                 <td><?php echo $users ['firstname']; ?></td>
                 <td><?php echo $users ['lastname']; ?></td>  
                 <td><?php echo $users ['level']; ?></td>  

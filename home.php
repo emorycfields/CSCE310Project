@@ -1,5 +1,11 @@
 <?php 
   $user_id = $_GET['userid'];
+  include "db_connection.php";
+
+  $sql = "SELECT `level` FROM `Users` WHERE `userid`='".$user_id."'";
+
+  $result = $conn->query($sql);
+  $row = mysqli_fetch_array($result);
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +17,11 @@
 </head>
 </html>
 
+<a href="login.php">
+    <button type="button" class="btn btn-primary" style="position:absolute; top:0; right:0;">
+        Logout
+    </button>
+</a>
 
 <div class="d-flex flex-grow-1 justify-content-center align-items-center">
   <div class="container py-4 ">
@@ -26,11 +37,13 @@
                       <h3 align="center">Schedule</h3>
                   </a>
               </div>
+              <?php if ($row['level'] == "admin"){?>
               <div class="card bg-light" style = "width: 30rem; height: 10rem ">
                   <a class="card-block stretched-link text-decoration-none" href = "users.php?userid=<?php echo $user_id ?>" style="color:black">
                       <h3 align="center" >Users</h3>
                   </a>
               </div>
+              <?php }?>
           </div>
       </div>
   </div>
