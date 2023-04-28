@@ -18,6 +18,18 @@
     <h1 align="center"> Users </h1>  
 </head>
 </html>
+
+<a href="home.php?userid=<?php echo $user_id?>">
+    <button type="button" class="btn btn-primary" style="position:absolute; top:0; right:0;">
+        <i style="font-size: 2em; " class="glyphicon glyphicon-home"></i>
+    </button>
+</a>
+
+<a href="adduser.php?userid=<?php echo $user_id?>">
+    <button type="button" class="btn btn-primary" >
+        <i style="font-size: 2em; " class="glyphicon glyphicon-plus"></i>
+    </button>
+</a>
 <div>
     <table id="editableTable" class="table table-bordered">
         <thead>
@@ -43,7 +55,7 @@
                 <td><?php echo $users ['email']; ?></td>
                 <td>
                     <a href="delete_user.php?todelete=<?php echo $users['userid']?>">Delete</a>
-                    <a href="updateuser.php?toedit=<?php echo $users['userid']?>">Delete</a>
+                    <a href="updateuser.php?toedit=<?php echo $users['userid']?>">Edit</a>
                 </td> 				   				   				  
                 </tr>
                 <?php } ?>

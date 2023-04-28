@@ -10,14 +10,14 @@
     $email = $_POST['email'];
     $password = $_POST['password'];
     
-    $sql = "INSERT INTO `Users`(`supervisor`, `first_name`, `last_name`, `level`, `email`, `password`) 
+    $sql = "INSERT INTO `Users`(`supervisor`, `firstname`, `lastname`, `level`, `email`, `password`) 
            VALUES ('$supervisor', '$first_name','$last_name', '$level', '$email','$password')";
     
     $result = $conn->query($sql);
     
     if ($result == TRUE) {
       echo "New record created successfully.";
-      header("Location: home.php?userid=$user_id");
+      header("Location: users.php?userid=$user_id");
     }else{
       echo "Error:". $sql . "<br>". $conn->error;
     }
