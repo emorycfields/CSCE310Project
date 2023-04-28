@@ -8,11 +8,11 @@
 
     $result = $conn->query($sql);
             
-            if ($result == TRUE) {
-            echo "New project created successfully.";
-            header("Location: projectdetails.php?proj_id=$proj_id&userid=$userid");
-            }else{
-            echo "Error:". $sql . "<br>". $conn->error;
-            }
-            $conn->close();
+    if ($result == TRUE) {
+        echo "New project created successfully.";
+        header("Location: projectdetails.php?proj_id=$proj_id&userid=$userid");
+    }else{
+        echo "Error:". $sql . "<br>". $conn->error;
+    }
+    $conn->close();
 ?>

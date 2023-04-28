@@ -27,7 +27,19 @@
 
 <!DOCTYPE html>
 <html>
-<body>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
+        <a href="home.php?userid=<?php echo $user_id?>">
+            <button type="button" class="btn btn-primary" style="position:absolute; top:0; right:0;">
+                <i style="font-size: 2em; " class="glyphicon glyphicon-home"></i>
+            </button>
+        </a>
+        <h1 align="center"> Add User </h1>
+    </head>
+</html>
+<html>
+<body style="text-align: center;">
 <h2>Registration Form</h2> 
 <form action="" method="POST">
   <fieldset>

@@ -16,6 +16,10 @@
         INNER JOIN users AS supervisorname on user1.supervisor = supervisorname.userid;";
     
     $result = $conn->query($sql);
+
+    if (isset($_POST['delete'])) {
+
+    }
 ?> 
 
 <!DOCTYPE html>
