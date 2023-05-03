@@ -17,6 +17,12 @@
 </head>
 </html>
 
+<a href="updateprofile.php?userid=<?php echo $user_id ?>">
+    <button type="button" class="btn btn-primary" style="position:absolute; top:0; left:0;">
+        Edit Profile
+    </button>
+</a>
+
 <a href="login.php">
     <button type="button" class="btn btn-primary" style="position:absolute; top:0; right:0;">
         Logout

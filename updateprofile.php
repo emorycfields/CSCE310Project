@@ -1,7 +1,6 @@
 <?php 
 $user_id = $_GET['userid'];
-$cur_id = $_GET['toedit'];
-echo $cur_id;
+
 echo $user_id;
 include "db_connection.php";
     $sql_grab_current = "SELECT * FROM `Users` WHERE `userid`='" .$user_id. "'";
@@ -15,21 +14,23 @@ include "db_connection.php";
     $new_last_name = $_POST['lastname'];
     $new_level = $_POST['level'];
     $new_email = $_POST['email'];
+    $new_password = $_POST['password'];
     
     $sql = "UPDATE `Users` SET 
                 `supervisor` = '$new_supervisor',
                 `firstname` = '$new_first_name',
                 `lastname` = '$new_last_name',
                 `level` = '$new_level',
-                `email` = '$new_email'
-            WHERE `userid` = $cur_id;";
+                `email` = '$new_email',
+                `password` = '$new_password'
+            WHERE `userid` = $user_id;";
     
     $result = $conn->query($sql);
     
     if ($result == TRUE) {
       echo "New record created successfully.";
       
-      header("Location: users.php?userid=$user_id");
+      header("Location: home.php?userid=$user_id");
     }else{
       echo "Error:". $sql . "<br>". $conn->error;
     }
@@ -41,6 +42,11 @@ include "db_connection.php";
 <!DOCTYPE html>
 <html>
 <body>
+<a href="delete_user.php?userid=<?php echo $user_id?>&todelete=<?php echo $user_id?>">
+    <button type="button" class="btn btn-primary" style="position:absolute; top:0; right:0;">
+        DELETE PROFILE
+    </button>
+</a>
 <h2>Update Profile</h2> 
 <form action="" method="POST">
   <fieldset>

@@ -1,7 +1,7 @@
 <?php
     include "db_connection.php";
 
-    
+    $user_id = $_GET['userid'];
    
     $sql = "SELECT
             user1.userid, 
@@ -68,8 +68,8 @@
                 <td><?php echo $users ['level']; ?></td>  
                 <td><?php echo $users ['email']; ?></td>
                 <td>
-                    <a href="delete_user.php?todelete=<?php echo $users['userid']?>">Delete</a>
-                    <a href="updateuser.php?toedit=<?php echo $users['userid']?>">Edit</a>
+                    <a href="delete_user.php?userid=<?php echo $user_id?>&todelete=<?php echo $users['userid']?>">Delete</a>
+                    <a href="updateuser.php?userid=<?php echo $user_id?>&toedit=<?php echo $users['userid']?>">Edit</a>
                 </td> 				   				   				  
                 </tr>
                 <?php } ?>
