@@ -20,7 +20,10 @@
                 comment_status.time, 
                 comment_status.approval_status, 
                 users.first_name, 
-                users.last_name
+                users.last_name, 
+                users.user_id, 
+                users.level, 
+                users.user_id 
             FROM
                 comment_status
             INNER JOIN users on users.user_id = comment_status.user_id
@@ -39,6 +42,20 @@
             INNER JOIN users on users.user_id = `project assignments`.user_id
             WHERE `project assignments`.project_id = $var_value;";
     $result3 = $conn->query($sql);
+
+    $sql = " SELECT
+                user_id,
+                first_name, 
+                last_name, 
+                user_id, 
+                supervisor,
+                level, 
+                email
+            FROM
+                `users`
+            WHERE `users`.user_id = $user_id;";
+    $result4 = $conn->query($sql);
+    $result4 = mysqli_fetch_array($result4);
 ?> 
 
 <html>
@@ -98,8 +115,10 @@
                             <br>
                             <h4>Author: <?php echo $row['first_name']?>  <?php echo $row['last_name']?></h4>
                             <h4><?php echo $row['time']?> <?php echo $row['date']?> </h4>
-                            <button onclick="window.location.href='deletecomment.php?comment_id=<?php echo $row['comment_id']?>&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>'"> DELETE </button>
-                            <button onclick="window.location.href='editcomment.php?comment_id=<?php echo $row['comment_id']?>&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>'"> EDIT </button>
+                            <?php if ($result4['level'] == 1 || $result4['user_id'] == $row['user_id']){?>
+                                <button onclick="window.location.href='deletecomment.php?comment_id=<?php echo $row['comment_id']?>&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>'"> DELETE </button>
+                                <button onclick="window.location.href='editcomment.php?comment_id=<?php echo $row['comment_id']?>&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>'"> EDIT </button>
+                            <?php }?>
                         </div>
                     </div>
                 </div>
@@ -112,7 +131,7 @@
 
 <h2 align="center"> Users </h2>
 
-<a href="addusertoproject.php?proj_id=<?php echo $var_value ?>&userid=<?php echo $user_id?>">
+<a href="viewallusers.php?proj_id=<?php echo $var_value ?>&userid=<?php echo $user_id?>">
     <button type="button" class="btn btn-primary" >
         <i style="font-size: 2em; " class="glyphicon glyphicon-plus"></i>
     </button>

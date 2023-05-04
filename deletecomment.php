@@ -10,7 +10,7 @@
             
     if ($result == TRUE) {
         echo "New project created successfully.";
-        header("Location: projectdetails.php?proj_id=$proj_id&userid=$userid");
+        header("Location: projectdetails.php?proj_id=$proj_id&userid=$user_id");
     }else{
         echo "Error:". $sql . "<br>". $conn->error;
     }
