@@ -7,7 +7,12 @@
 
     // Obtain the user level to determine admin privileges
     // Can utilize the isAdmin index, which consists of level and user_id
-    $user_sql = "SELECT users.level FROM users WHERE users.user_id = $user_id LIMIT 1";
+    $user_sql = "SELECT 
+                    users.level 
+                FROM 
+                    users 
+                WHERE users.user_id = $user_id 
+                LIMIT 1;";
     $user = $conn->query($user_sql);
     $userRow = mysqli_fetch_array($user);
 
@@ -29,10 +34,10 @@
     $nextMonday = strtotime('+7 days', $mondayTS);
 
     // Select meetings that the current user is invited to
-    $sql = " SELECT events.event_id, events.date, events.location, events.name, events.project_id, events.time, events.user_id FROM events INNER JOIN event_attendee ON event_attendee.event_id = events.event_id WHERE event_attendee.user_id = $user_id";
+    $sql = " SELECT events.event_id, events.date, events.location, events.name, events.project_id, events.time, events.user_id FROM events INNER JOIN `event attendee` ON `event attendee`.event_id = events.event_id WHERE `event attendee`.user_id = $user_id";
     // If the user is an admin, they can see every event
     if ($userRow["level"] == 1) {
-        $sql = " SELECT * from allEvents";
+        $sql = "SELECT * from allEvents";
     }
     $result = $conn->query($sql);
 
@@ -51,20 +56,20 @@
 
         // Convert the project id into a displayable name
         $project_id = $row["project_id"];
-        $project_sql = "SELECT project_name FROM projecttitle WHERE projecttitle.project_id = $project_id LIMIT 1";
+        $project_sql = "SELECT project_name FROM projects WHERE projects.project_id = $project_id LIMIT 1";
         $project = $conn->query($project_sql);
         $projRow = mysqli_fetch_array($project);
 
         // Convert the user id into a displayable name
         $maker_id = $row["user_id"];
-        $maker_sql = "SELECT first_name, last_name FROM username WHERE username.user_id = $maker_id LIMIT 1";
+        $maker_sql = "SELECT first_name, last_name FROM users WHERE users.user_id = $maker_id LIMIT 1";
         $maker = $conn->query($maker_sql);
         $makerRow = mysqli_fetch_array($maker);
 
         // Specifically for admin functionality, determine if the queried event is one they're attending
         $event_id = $row["event_id"];
         // Checks if the current event_id and user_id exist together in the bridge entity
-        $event_sql = "SELECT user_id FROM event_attendee WHERE event_attendee.user_id = $user_id AND event_attendee.event_id = $event_id";
+        $event_sql = "SELECT user_id FROM `event attendee` WHERE `event attendee`.user_id = $user_id AND `event attendee`.event_id = $event_id";
         $event_conn = $conn->query($event_sql);
         $attending = true;
         if (mysqli_num_rows($event_conn) == 0) { // if the entity instance did not exist, the user is not attending this event
@@ -132,7 +137,7 @@
             <!-- Loops through all the monday events -->
             <?php foreach($mondays as $event): ?>
                 <div class="card-columns-fluid">
-                        <div class="card bg-light" style = "width: 15rem; height: 15rem " >
+                        <div class="card bg-light" style = "width: 17rem; height: 17rem " >
                             <div class="card-body">
                                 <!-- Visually distinguish which events an admin is attending,
                                 since all events appear on their page. $event[8] represents the true/false bool -->
@@ -168,7 +173,7 @@
             <h4> Tuesday <?php echo $tuesday?> </h4>
             <?php foreach($tuesdays as $event): ?>
                 <div class="card-columns-fluid">
-                        <div class="card bg-light" style = "width: 15rem; height: 15rem " >
+                        <div class="card bg-light" style = "width: 17rem; height: 17rem " >
                             <div class="card-body">
                                 <?php if($userRow["level"] == 1 and $event[8]): ?>
                                     <h7 style="color:red"> Attending! </h7>
@@ -198,7 +203,7 @@
             <h4> Wednesday <?php echo $wednesday?> </h4>
             <?php foreach($wednesdays as $event): ?>
                 <div class="card-columns-fluid">
-                        <div class="card bg-light" style = "width: 15rem; height: 15rem " >
+                        <div class="card bg-light" style = "width: 17rem; height: 17rem " >
                             <div class="card-body">
                                 <?php if($userRow["level"] == 1 and $event[8]): ?>
                                     <h7 style="color:red"> Attending! </h7>
@@ -228,7 +233,7 @@
             <h4> Thursday <?php echo $thursday?> </h4>
             <?php foreach($thursdays as $event): ?>
                 <div class="card-columns-fluid">
-                        <div class="card bg-light" style = "width: 15rem; height: 15rem " >
+                        <div class="card bg-light" style = "width: 17rem; height: 17rem " >
                             <div class="card-body">
                                 <?php if($userRow["level"] == 1 and $event[8]): ?>
                                     <h7 style="color:red"> Attending! </h7>
@@ -258,7 +263,7 @@
             <h4> Friday <?php echo $friday?> </h4>
             <?php foreach($fridays as $event): ?>
                 <div class="card-columns-fluid">
-                        <div class="card bg-light" style = "width: 15rem; height: 15rem " >
+                        <div class="card bg-light" style = "width: 17rem; height: 17rem " >
                             <div class="card-body">
                                 <?php if($userRow["level"] == 1 and $event[8]): ?>
                                     <h7 style="color:red"> Attending! </h7>

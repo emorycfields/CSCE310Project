@@ -13,7 +13,7 @@
             user1.email
         FROM
             users AS user1
-        INNER JOIN users AS supervisorname on user1.supervisor = supervisorname.user_id;";
+        LEFT JOIN users AS supervisorname on user1.supervisor = supervisorname.user_id;";
     
     $result = $conn->query($sql);
 

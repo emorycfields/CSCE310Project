@@ -48,17 +48,18 @@ include "db_connection.php";
       // This only inserts the event data into the events page; it does not deal with attendees yet
       $sql = "INSERT INTO `events`(`project_id`, `user_id`, `date`, `time`, `name`, `location`) 
              VALUES ('$project', '$user_id', '$date', '$time', '$name', '$location')";
+      echo $sql;
       $result = $conn->query($sql);
-      // Get the event_id of the new event. This is used to update the event_attendee table
+      // Get the event_id of the new event. This is used to update the event attendee table
       if ($result) {
         $event = $conn->insert_id;
       }
 
       // If attendees have been selected, inserts into the DB
       if(!empty($_POST["attendees"])) {
-        // Loops through each attendee and adds to the event_attendee table using the new event_id
+        // Loops through each attendee and adds to the event attendee table using the new event_id
         foreach($_POST['attendees'] as $key) {
-          $bridgeSQL = "INSERT INTO `event_attendee`(`event_id`, `user_id`) 
+          $bridgeSQL = "INSERT INTO `event attendee` (`event_id`, `user_id`) 
                 VALUES ('$event', '$key')";
           $bridgeResult = $conn->query($bridgeSQL);
   
