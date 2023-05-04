@@ -23,6 +23,12 @@
 </head>
 </html>
 
+<a href="updateprofile.php?userid=<?php echo $user_id ?>">
+    <button type="button" class="btn btn-primary" style="position:absolute; top:0; left:0;">
+        Edit Profile
+    </button>
+</a>
+
 <a href="login.php">
     <button type="button" class="btn btn-primary" style="position:absolute; top:0; right:0;">
         Logout
@@ -45,9 +51,10 @@
                       <h3 align="center">Schedule</h3>
                   </a>
               </div>
+              <?php if ($row['level'] == 1){?>
               <div class="card bg-light" style = "width: 30rem; height: 7rem ">
-                  <a class="card-block stretched-link text-decoration-none" href = "adduser.php?userid=".$user_id style="color:black">
-                      <h3 align="center" >Add User</h3>
+                  <a class="card-block stretched-link text-decoration-none" href = "users.php?userid=<?php echo $user_id ?>" style="color:black">
+                      <h3 align="center" >Users</h3>
                   </a>
               </div>
           </div>

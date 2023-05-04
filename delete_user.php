@@ -1,8 +1,9 @@
 <?php 
 
 include "db_connection.php";
+  $user_id = $_GET['userid'];
   $delete_user = $_GET['todelete'];
-  if (isset($_POST['submit'])) {
+  //if (isset($_POST['submit'])) {
     
     
     $sql = "DELETE FROM `Users` WHERE `userid`='" .$delete_user. "'";
@@ -11,25 +12,17 @@ include "db_connection.php";
     
     if ($result == TRUE) {
       echo "New record deleted successfully.";
-      header("Location: users.php");
+      if ($user_id == $delete_user) {
+        header("Location: login.php");
+      } else {
+        header("Location: users.php?userid=$user_id");
+      }
+      
     }else{
       echo "Error:". $sql . "<br>". $conn->error;
     }
     $conn->close();
-  }
+  //}
 
 ?> 
 
-<!DOCTYPE html>
-<html>
-<body>
-<h2>Delete User</h2> 
-<form action="" method="POST">
-  <fieldset>
-    <legend>Information:</legend>
-    
-    <input type="submit" name="submit" value="submit">
-  </fieldset>
-</form> 
-</body>
-</html>
