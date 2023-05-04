@@ -1,6 +1,7 @@
 <?php 
+  $user_id = $_GET['userid'];
 
-include "db_connection.php";
+  include "db_connection.php";
   if (isset($_POST['submit'])) {
     $supervisor = $_POST['supervisor'];
     $first_name = $_POST['firstname'];
@@ -16,6 +17,7 @@ include "db_connection.php";
     
     if ($result == TRUE) {
       echo "New record created successfully.";
+      header("Location: home.php?userid=".$user_id);
     }else{
       echo "Error:". $sql . "<br>". $conn->error;
     }
