@@ -1,4 +1,5 @@
 <!-- All Emory -->
+<!-- this page holds the interface and query for inserting a new comment for a project --> 
 <?php 
     include "db_connection.php";
 
@@ -47,23 +48,23 @@
 
 <!-- create form for making a new table -->
 <body style="text-align: center;"> 
-<form action="" method="POST">
-  <fieldset>
-    Comment:<br>
-    <input type="text" name="comment" size="200">
-    <br>
-    Status:<br>
-    <select name="status">
-        <option value="Not Started">Not Started</option>
-        <option value="In Progress">In progress</option>
-        <option value="Blocked">Blocked</option>
-        <option value="Completed">Completed </option>
-    </select>
-    <br>
+    <form action="" method="POST">
+    <fieldset>
+        Comment:<br>
+        <input type="text" name="comment" size="200">
+        <br>
+        Status:<br>
+        <select name="status">
+            <option value="Not Started">Not Started</option>
+            <option value="In Progress">In progress</option>
+            <option value="Blocked">Blocked</option>
+            <option value="Completed">Completed </option>
+        </select>
+        <br>
 
-    <br>
+        <br>
 
-    <input type="submit" name="submit" value="submit">
-  </fieldset>
-</form> 
+        <input type="submit" name="submit" value="submit">
+    </fieldset>
+    </form> 
 </body>

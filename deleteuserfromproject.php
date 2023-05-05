@@ -1,4 +1,5 @@
 <!-- EMORY -->
+<!-- THis file executes the query that removes a user from a project --> 
 <?php 
 
   include "db_connection.php";

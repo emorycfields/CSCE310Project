@@ -69,53 +69,53 @@ include "db_connection.php";
 
 <!DOCTYPE html>
 <html>
-<body>
-<!-- Utilizes the same logic as the event.php page -->
-<h2>Update Event</h2> 
-<form action="" method="POST">
-  <fieldset>
-    <legend>Information:</legend>
-    Name:<br>
-    <input type="text" name="name">
-    <br>
-    Location:<br>
-    <input type="text" name="location">
-    <br>
-    Project:<br>
-    <select name="project">
-      <?php 
-      $sql = mysqli_query($conn, "SELECT project_name, project_id FROM projects");
-      while ($row = $sql->fetch_assoc()){
-        unset($project_name, $project_id);
-        $id = $row['project_id'];
-        $name = $row['project_name']; 
-        echo '<option value="'.$id.'">'.$name.'</option>';
-      }
-      ?>
-    </select>
-    <br>
-    Attendees:<br>
-    <select name="attendees[]" multiple="multiple">
-      <?php 
-      $sql = mysqli_query($conn, "SELECT first_name, last_name, user_id FROM users");
-      while ($row = $sql->fetch_assoc()){
-        unset($first_name, $last_name, $user_id);
-        $id = $row['user_id'];
-        $last_name = $row['last_name'];  
-        $first_name = $row['first_name']; 
-        echo '<option value="'.$id.'">'.$first_name. " " . $last_name .'</option>';
-      }
-      ?>
-    </select>
-    <br>
-    Date:<br>
-    <input type="date" name="date">
-    <br>
-    Time:<br>
-    <input type="time" name="time">
-    <br>
-    <input type="submit" name="submit" value="submit">
-  </fieldset>
-</form> 
-</body>
+  <body>
+    <!-- Utilizes the same logic as the event.php page -->
+    <h2>Update Event</h2> 
+    <form action="" method="POST">
+      <fieldset>
+        <legend>Information:</legend>
+        Name:<br>
+        <input type="text" name="name">
+        <br>
+        Location:<br>
+        <input type="text" name="location">
+        <br>
+        Project:<br>
+        <select name="project">
+          <?php 
+          $sql = mysqli_query($conn, "SELECT project_name, project_id FROM projects");
+          while ($row = $sql->fetch_assoc()){
+            unset($project_name, $project_id);
+            $id = $row['project_id'];
+            $name = $row['project_name']; 
+            echo '<option value="'.$id.'">'.$name.'</option>';
+          }
+          ?>
+        </select>
+        <br>
+        Attendees:<br>
+        <select name="attendees[]" multiple="multiple">
+          <?php 
+          $sql = mysqli_query($conn, "SELECT first_name, last_name, user_id FROM users");
+          while ($row = $sql->fetch_assoc()){
+            unset($first_name, $last_name, $user_id);
+            $id = $row['user_id'];
+            $last_name = $row['last_name'];  
+            $first_name = $row['first_name']; 
+            echo '<option value="'.$id.'">'.$first_name. " " . $last_name .'</option>';
+          }
+          ?>
+        </select>
+        <br>
+        Date:<br>
+        <input type="date" name="date">
+        <br>
+        Time:<br>
+        <input type="time" name="time">
+        <br>
+        <input type="submit" name="submit" value="submit">
+      </fieldset>
+    </form> 
+  </body>
 </html>

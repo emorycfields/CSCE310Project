@@ -1,4 +1,5 @@
 <!-- EMORY --> 
+<!-- This file executes the SQL query that adds a user to a project -->
 <?php 
   $project_id = $_GET['proj_id'];
   $userid = $_GET['userid'];

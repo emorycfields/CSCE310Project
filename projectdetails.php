@@ -1,4 +1,5 @@
 <!-- EMORY AND GABE -->
+<!-- This file holds the project details for a particular project, including the items, comments, and users associated with that project --> 
 <?php
 
     // EMORY start 
@@ -71,9 +72,7 @@
 </html>
 <!-- EMORY END -->
 
-<!-- GABE -->
-
-<! -- ITEMS SECTION GABE -- >
+<!-- ITEMS SECTION GABE -->
 <?php
     // Take in global variables passed in from the search bar
     $var_value = $_GET['proj_id'];
@@ -153,43 +152,42 @@
 ?> 
 
 <h2 align="center"> Items </h2>
-<! -- If the user is admin or the manager of the project, allow them to add items to the project via the blue plus sign -- >
-    <?php if($proj_manager or $admin) : ?>
-        <a href="availableitems.php?&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>">
-            <button type="button" class="btn btn-primary" style=" left: 30">
-                <i style="font-size: 2em; " class="glyphicon glyphicon-plus"></i>
-            </button>
-        </a>
-    <?php endif; ?>
+<!-- If the user is admin or the manager of the project, allow them to add items to the project via the blue plus sign -->
+<?php if($proj_manager or $admin) : ?>
+    <a href="availableitems.php?&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>">
+        <button type="button" class="btn btn-primary" style=" left: 30">
+            <i style="font-size: 2em; " class="glyphicon glyphicon-plus"></i>
+        </button>
+    </a>
+<?php endif; ?>
 
 <div class="container">
     <div class="row-fluid ">
-    <! -- For each item in the project displays the name, description, total cost, quantity, and ID on a card -- >
-        <?php while ( $row = mysqli_fetch_array($result3) ) : ?>
-            <div class="col-sm-4 ">
-                <div class="card-columns-fluid">
-                    <div class="card bg-light" style = "width: 30rem; height: 35rem " >
-                        <div class="card-body">
-                            <h3>Item Name: </h3>
-                                <h4> <?php echo $row['name']?> </h4>
-                            <h3>Description: </h3>
-                                <h4> <?php echo $row['description']?> </h4>
-                            <h3>Cost: $<?php echo $row['total_cost']?></h3>
-                                <h4>Quantity: <?php echo $row['quantity']?></h4>
-                                <h4>ID: <?php echo $row['item_id']?></h4>
-                                <! -- If the user is admin or the manager of the project, allow them to remove items from the project or edit the quantity of an item assignment via their respective buttons -- >
-                            <?php if($proj_manager or $admin) : ?>
-                                <button onclick="window.location.href='removeitem.php?item_id=<?php echo $row['item_id']?>&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>'"> REMOVE </button>
-                                <button onclick="window.location.href='editquantity.php?item_id=<?php echo $row['item_id']?>&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>'"> EDIT QUANTITY </button>
-                            <?php endif; ?>
+        <!-- For each item in the project displays the name, description, total cost, quantity, and ID on a card -->
+            <?php while ( $row = mysqli_fetch_array($result3) ) : ?>
+                <div class="col-sm-4 ">
+                    <div class="card-columns-fluid">
+                        <div class="card bg-light" style = "width: 30rem; height: 35rem " >
+                            <div class="card-body">
+                                <h3>Item Name: </h3>
+                                    <h4> <?php echo $row['name']?> </h4>
+                                <h3>Description: </h3>
+                                    <h4> <?php echo $row['description']?> </h4>
+                                <h3>Cost: $<?php echo $row['total_cost']?></h3>
+                                    <h4>Quantity: <?php echo $row['quantity']?></h4>
+                                    <h4>ID: <?php echo $row['item_id']?></h4>
+                                    <! -- If the user is admin or the manager of the project, allow them to remove items from the project or edit the quantity of an item assignment via their respective buttons -- >
+                                <?php if($proj_manager or $admin) : ?>
+                                    <button onclick="window.location.href='removeitem.php?item_id=<?php echo $row['item_id']?>&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>'"> REMOVE </button>
+                                    <button onclick="window.location.href='editquantity.php?item_id=<?php echo $row['item_id']?>&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>'"> EDIT QUANTITY </button>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        <?php endwhile; ?>
+            <?php endwhile; ?>
         </div>
     </div>
-
 <br>
 <!-- EMORY START  -->
 <!-- (list out all comments in the form of blocks) -->
@@ -227,7 +225,6 @@
                 </div>
             </div>
         <?php endwhile; ?>
-        </div>
     </div>
 <br>
 

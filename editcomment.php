@@ -1,4 +1,5 @@
 <!-- ALL EMORY -->
+<!-- This file provides the Query and interface for allowing users to update an existing comment -->
 <?php
     include "db_connection.php";
 

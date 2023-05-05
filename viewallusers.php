@@ -1,4 +1,5 @@
 <!-- EMORY --> 
+<!-- This file lists all of the users that can be added to a project --> 
 <?php 
     $project_id = $_GET['proj_id'];
     $userid = $_GET['userid'];
@@ -40,10 +41,8 @@
     </head>
 </html>
 
-
-<html>
-
 <!-- list out all the users not currently in the project and include a button to add the user to the project --> 
+<html>
 <body style="text-align: center;">
     <div>
         <table id="editableTable" class="table table-bordered">

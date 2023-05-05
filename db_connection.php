@@ -1,3 +1,5 @@
+<!-- Everyone --> 
+<!-- This is used on other pages to establish the database connection --> 
 <?php
     $servername = "localhost";
     $username = "root";

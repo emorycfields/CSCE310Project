@@ -1,3 +1,5 @@
+<!-- All ALLISON --> 
+<!-- This file allows users to update other users's profiles-->
 <?php 
 $user_id = $_GET['userid'];
 $cur_id = $_GET['toedit'];
@@ -40,49 +42,49 @@ include "db_connection.php";
 <!DOCTYPE html>
 <html>
 <body>
-<h2>Update Profile</h2> 
-<form action="" method="POST">
-  <fieldset>
-    <legend>Information:</legend>
-    Supervisor:<br>
-    <select name="supervisor">
-        <option></option>
-        <!-- Queries the database for available users, displaying all in a dropdown -->
-        <?php 
-        $sql = mysqli_query($conn, "SELECT first_name, last_name, user_id FROM users");
-        while ($users = $sql->fetch_assoc()){
-          unset($first_name, $last_name, $user_id);
-          $id = $users['user_id'];
-          $first_name = $users['first_name']; 
-          $last_name = $users['last_name']; 
-          // Displays the user name but stores the user id when selected
-          // displays the current supervisor as current selected value
-          if ($id == $row['supervisor']) {
-            echo '<option value="'.$id.'" selected>'.$first_name.' '.$last_name.'</option>';
-          } else {
-            echo '<option value="'.$id.'">'.$first_name.' '.$last_name.'</option>';
+  <h2>Update Profile</h2> 
+  <form action="" method="POST">
+    <fieldset>
+      <legend>Information:</legend>
+      Supervisor:<br>
+      <select name="supervisor">
+          <option></option>
+          <!-- Queries the database for available users, displaying all in a dropdown -->
+          <?php 
+          $sql = mysqli_query($conn, "SELECT first_name, last_name, user_id FROM users");
+          while ($users = $sql->fetch_assoc()){
+            unset($first_name, $last_name, $user_id);
+            $id = $users['user_id'];
+            $first_name = $users['first_name']; 
+            $last_name = $users['last_name']; 
+            // Displays the user name but stores the user id when selected
+            // displays the current supervisor as current selected value
+            if ($id == $row['supervisor']) {
+              echo '<option value="'.$id.'" selected>'.$first_name.' '.$last_name.'</option>';
+            } else {
+              echo '<option value="'.$id.'">'.$first_name.' '.$last_name.'</option>';
+            }
           }
-        }
-        ?>
-      </select>
-    <br>
-    First name:<br>
-    <input type="text" name="firstname" value="<?php echo $row['first_name'];?>">
-    <br>
-    Last name:<br>
-    <input type="text" name="lastname" value="<?php echo $row['last_name'];?>">
-    <br>
-    Level:<br>
-    <input type="text" name="level" value="<?php echo $row['level'];?>">
-    <br>
-    Email:<br>
-    <input type="email" name="email" value="<?php echo $row['email'];?>">
-    <br>
-    Password:<br>
-    <input type="password" name="password" value="<?php echo $row['password'];?>">
-    <br>
-    <input type="submit" name="submit" value="submit">
-  </fieldset>
-</form> 
+          ?>
+        </select>
+      <br>
+      First name:<br>
+      <input type="text" name="firstname" value="<?php echo $row['first_name'];?>">
+      <br>
+      Last name:<br>
+      <input type="text" name="lastname" value="<?php echo $row['last_name'];?>">
+      <br>
+      Level:<br>
+      <input type="text" name="level" value="<?php echo $row['level'];?>">
+      <br>
+      Email:<br>
+      <input type="email" name="email" value="<?php echo $row['email'];?>">
+      <br>
+      Password:<br>
+      <input type="password" name="password" value="<?php echo $row['password'];?>">
+      <br>
+      <input type="submit" name="submit" value="submit">
+    </fieldset>
+  </form> 
 </body>
 </html>

@@ -1,7 +1,8 @@
 <!-- All Allison -->
+<!-- This file executes the query that deletes a user from a database -->
 <?php 
 
-include "db_connection.php";
+  include "db_connection.php";
 
   // obtains which user is currently logged in and which user is to be deleted
   $user_id = $_GET['userid'];
