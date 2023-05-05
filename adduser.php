@@ -1,24 +1,15 @@
-<!-- All Allison -->
 <?php 
-
-  /*
-  find current user, this user must be an admin -- only accessible through users page
-  which is exclusive to admin
-  */
   $user_id = $_GET['userid'];
 
   include "db_connection.php";
   if (isset($_POST['submit'])) {
-
-    // obtains all values for user from the form
     $supervisor = $_POST['supervisor'];
     $first_name = $_POST['firstname'];
     $last_name = $_POST['lastname'];
     $level = $_POST['level'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-
-    // inserts into the users table
+    
     $sql = "INSERT INTO `Users`(`supervisor`, `first_name`, `last_name`, `level`, `email`, `password`) 
            VALUES ('$supervisor', '$first_name','$last_name', '$level', '$email','$password')";
     
@@ -26,8 +17,6 @@
     
     if ($result == TRUE) {
       echo "New record created successfully.";
-
-      // reroutes user back to users page with current user id stored
       header("Location: users.php?userid=$user_id");
     }else{
       echo "Error:". $sql . "<br>". $conn->error;
@@ -56,7 +45,21 @@
   <fieldset>
     <legend>Information:</legend>
     Supervisor:<br>
-    <input type="text" name="supervisor">
+    <select name="supervisor">
+        <option></option>
+        <!-- Queries the database for available users, displaying all in a dropdown -->
+        <?php 
+        $sql = mysqli_query($conn, "SELECT first_name, last_name, user_id FROM users");
+        while ($row = $sql->fetch_assoc()){
+          unset($first_name, $last_name, $user_id);
+          $id = $row['user_id'];
+          $first_name = $row['first_name']; 
+          $last_name = $row['last_name']; 
+          // Displays the user name but stores the user id when selected
+          echo '<option value="'.$id.'">'.$first_name.' '.$last_name.'</option>';
+        }
+        ?>
+      </select>
     <br>
     First name:<br>
     <input type="text" name="firstname">

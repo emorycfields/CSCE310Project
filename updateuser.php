@@ -1,16 +1,12 @@
-<!-- All Allison -->
-<!-- This allows the admin to be able to edit another user's profile -->
 <?php 
 $user_id = $_GET['userid'];
 $cur_id = $_GET['toedit'];
 include "db_connection.php";
-  // gets the current information in the user table from the database
-    $sql_grab_current = "SELECT * FROM `Users` WHERE `user_id`='" .$user_id. "'";
+    $sql_grab_current = "SELECT * FROM `Users` WHERE `user_id`='" .$cur_id. "'";
     $result_current = $conn->query($sql_grab_current);
     $row = mysqli_fetch_array($result_current);
   if (isset($_POST['submit'])) {
 
-    // obtains new information from form
     $new_supervisor = $_POST['supervisor'];
     $new_first_name = $_POST['firstname'];
     $new_last_name = $_POST['lastname'];
@@ -29,7 +25,7 @@ include "db_connection.php";
     
     if ($result == TRUE) {
       echo "New record created successfully.";
-      // redirects back to users page with stored user id
+      
       header("Location: users.php?userid=$user_id");
     }else{
       echo "Error:". $sql . "<br>". $conn->error;
@@ -47,7 +43,21 @@ include "db_connection.php";
   <fieldset>
     <legend>Information:</legend>
     Supervisor:<br>
-    <input type="text" name="supervisor" value="<?php echo $row['supervisor'];?>">
+    <select name="supervisor">
+        <option></option>
+        <!-- Queries the database for available users, displaying all in a dropdown -->
+        <?php 
+        $sql = mysqli_query($conn, "SELECT first_name, last_name, user_id FROM users");
+        while ($users = $sql->fetch_assoc()){
+          unset($first_name, $last_name, $user_id);
+          $id = $users['user_id'];
+          $first_name = $users['first_name']; 
+          $last_name = $users['last_name']; 
+          // Displays the user name but stores the user id when selected
+          echo '<option value="'.$id.'">'.$first_name.' '.$last_name.'</option>';
+        }
+        ?>
+      </select>
     <br>
     First name:<br>
     <input type="text" name="firstname" value="<?php echo $row['first_name'];?>">
