@@ -18,20 +18,11 @@
     $project_result = mysqli_fetch_array($project_result);
     
     // select the comments & the user information for their author
+    // COMMENTS_AUTHOR_INFO is the view
     $sql = " SELECT
-                comment_status.comment_id, 
-                comment_status.description, 
-                comment_status.date, 
-                comment_status.time, 
-                comment_status.approval_status, 
-                users.first_name, 
-                users.last_name, 
-                users.user_id, 
-                users.level, 
-                users.user_id 
-            FROM
-                comment_status
-            INNER JOIN users on users.user_id = comment_status.user_id
+                *
+            FROM 
+            comments_author_info
             WHERE project_id = $var_value;";
     $comment_result = $conn->query($sql);
 
