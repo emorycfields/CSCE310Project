@@ -1,12 +1,16 @@
+<!-- All Allison -->
+<!-- This allows the admin to be able to edit another user's profile -->
 <?php 
 $user_id = $_GET['userid'];
 $cur_id = $_GET['toedit'];
 include "db_connection.php";
+  // gets the current information in the user table from the database
     $sql_grab_current = "SELECT * FROM `Users` WHERE `user_id`='" .$user_id. "'";
     $result_current = $conn->query($sql_grab_current);
     $row = mysqli_fetch_array($result_current);
   if (isset($_POST['submit'])) {
 
+    // obtains new information from form
     $new_supervisor = $_POST['supervisor'];
     $new_first_name = $_POST['firstname'];
     $new_last_name = $_POST['lastname'];
@@ -25,7 +29,7 @@ include "db_connection.php";
     
     if ($result == TRUE) {
       echo "New record created successfully.";
-      
+      // redirects back to users page with stored user id
       header("Location: users.php?userid=$user_id");
     }else{
       echo "Error:". $sql . "<br>". $conn->error;
