@@ -1,4 +1,7 @@
 <!-- ALL JOHN -->
+<!-- This file inserts an event into the DB -->
+<!-- The file queries the DB to get possible projects / users to associate to the event -->
+<!-- The file also inserts the corresponding event attendee entries -->
 <?php 
 include "db_connection.php";
   $user_id = $_GET['userid'];
