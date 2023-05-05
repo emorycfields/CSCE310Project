@@ -1,4 +1,4 @@
-<! -- ALL GABE -->
+<!-- ALL GABE -->
 <?php 
     // Take in global variable passed in from the search bar
     $user_id = $_GET['userid'];

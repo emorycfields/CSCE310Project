@@ -1,8 +1,11 @@
+<!-- Allison and Emory -->
+<!-- ALLISON -->
 <?php 
   $user_id = $_GET['userid'];
 
   include "db_connection.php";
   if (isset($_POST['submit'])) {
+    // obtains fields from form
     $supervisor = $_POST['supervisor'];
     $first_name = $_POST['firstname'];
     $last_name = $_POST['lastname'];
@@ -45,6 +48,7 @@
   <fieldset>
     <legend>Information:</legend>
     Supervisor:<br>
+    <!-- EMORY -->
     <select name="supervisor">
         <option></option>
         <!-- Queries the database for available users, displaying all in a dropdown -->
@@ -60,6 +64,7 @@
         }
         ?>
       </select>
+      <!-- END EMORY -->
     <br>
     First name:<br>
     <input type="text" name="firstname">

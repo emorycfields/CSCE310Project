@@ -1,4 +1,4 @@
-<!-- EMORY AND JOHN -->
+<!-- All members -->
 <?php 
   $user_id = $_GET['userid'];
   include "db_connection.php";
