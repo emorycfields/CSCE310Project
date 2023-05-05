@@ -29,10 +29,10 @@
     $nextMonday = strtotime('+7 days', $mondayTS);
 
     // Select meetings that the current user is invited to
-    $sql = " SELECT events.event_id, events.date, events.location, events.name, events.project_id, events.time, events.user_id FROM events INNER JOIN `event attendee` ON `event attendee`.event_id = events.event_id WHERE `event attendee`.user_id = $user_id";
+    $sql = " SELECT events.event_id, events.date, events.location, events.name, events.project_id, events.time, events.user_id FROM events INNER JOIN event_attendee ON event_attendee.event_id = events.event_id WHERE event_attendee.user_id = $user_id";
     // If the user is an admin, they can see every event
     if ($userRow["level"] == 1) {
-        $sql = "SELECT * from events";
+        $sql = " SELECT * from events";
     }
     $result = $conn->query($sql);
 
@@ -64,7 +64,7 @@
         // Specifically for admin functionality, determine if the queried event is one they're attending
         $event_id = $row["event_id"];
         // Checks if the current event_id and user_id exist together in the bridge entity
-        $event_sql = "SELECT user_id FROM `event attendee` WHERE `event attendee`.user_id = $user_id AND `event attendee`.event_id = $event_id";
+        $event_sql = "SELECT user_id FROM event_attendee WHERE event_attendee.user_id = $user_id AND event_attendee.event_id = $event_id";
         $event_conn = $conn->query($event_sql);
         $attending = true;
         if (mysqli_num_rows($event_conn) == 0) { // if the entity instance did not exist, the user is not attending this event
@@ -132,8 +132,8 @@
             <!-- Loops through all the monday events -->
             <?php foreach($mondays as $event): ?>
                 <div class="card-columns-fluid">
-                        <div class="card bg-light" style = "width: 17rem; height: 17rem " >
-                            <div class="card-body">
+                        <div class="card bg-light" style = "width: 15rem; height: 15rem " >
+                            <div class="card-body" style="overflow: scroll">
                                 <!-- Visually distinguish which events an admin is attending,
                                 since all events appear on their page. $event[8] represents the true/false bool -->
                                 <?php if($userRow["level"] == 1 and $event[8]): ?>
@@ -147,16 +147,16 @@
                                 Admins have these buttons for every event -->
                                 <?php if($event[2] == $user_id or $userRow["level"] == 1): ?>
                                     <a href="eventupdate.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:black; border:3px solid;">Edit Meeting</a>
-                                    <a href="deleteevent.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:red; margin:1.35rem">X</a>
+                                    <a href="deleteevent.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:red;">X</a>
                                     <br>
                                 <?php endif; ?> 
-                                <h7> Name: <?php echo $event[5]?></h7>
+                                <h7 style="white-space: nowrap;"> Name: <?php echo $event[5]?></h7>
                                 <br>
-                                <h7> Location: <?php echo $event[4]?></h7>
+                                <h7 style="white-space: nowrap;"> Location: <?php echo $event[4]?></h7>
                                 <br>
                                 <h7> Time: <?php echo $event[3]?></h7>
                                 <br>
-                                <h7> Project: <?php echo $event[1]?></h7>
+                                <h7 style="white-space: nowrap;"> Project: <?php echo $event[1]?></h7>
                             </div>
                         </div>
                 </div>
@@ -168,8 +168,8 @@
             <h4> Tuesday <?php echo $tuesday?> </h4>
             <?php foreach($tuesdays as $event): ?>
                 <div class="card-columns-fluid">
-                        <div class="card bg-light" style = "width: 17rem; height: 17rem " >
-                            <div class="card-body">
+                        <div class="card bg-light" style = "width: 15rem; height: 15rem " >
+                            <div class="card-body" style="overflow: scroll">
                                 <?php if($userRow["level"] == 1 and $event[8]): ?>
                                     <h7 style="color:red"> Attending! </h7>
                                     <br>
@@ -178,16 +178,16 @@
                                 <br>
                                 <?php if($event[2] == $user_id or $userRow["level"] == 1): ?>
                                     <a href="eventupdate.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:black; border:3px solid;">Edit Meeting</a>
-                                    <a href="deleteevent.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:red; margin:1.35rem">X</a>
+                                    <a href="deleteevent.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:red; ">X</a>
                                     <br>
                                 <?php endif; ?> 
-                                <h7> Name: <?php echo $event[5]?></h7>
+                                <h7 style="white-space: nowrap;"> Name: <?php echo $event[5]?></h7>
                                 <br>
-                                <h7> Location: <?php echo $event[4]?></h7>
+                                <h7 style="white-space: nowrap;"> Location: <?php echo $event[4]?></h7>
                                 <br>
                                 <h7> Time: <?php echo $event[3]?></h7>
                                 <br>
-                                <h7> Project: <?php echo $event[1]?></h7>
+                                <h7 style="white-space: nowrap;"> Project: <?php echo $event[1]?></h7>
                             </div>
                         </div>
                 </div>
@@ -198,8 +198,8 @@
             <h4> Wednesday <?php echo $wednesday?> </h4>
             <?php foreach($wednesdays as $event): ?>
                 <div class="card-columns-fluid">
-                        <div class="card bg-light" style = "width: 17rem; height: 17rem " >
-                            <div class="card-body">
+                        <div class="card bg-light" style = "width: 15rem; height: 15rem " >
+                            <div class="card-body" style="overflow: scroll">
                                 <?php if($userRow["level"] == 1 and $event[8]): ?>
                                     <h7 style="color:red"> Attending! </h7>
                                     <br>
@@ -208,16 +208,16 @@
                                 <br>
                                 <?php if($event[2] == $user_id or $userRow["level"] == 1): ?>
                                     <a href="eventupdate.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:black; border:3px solid;">Edit Meeting</a>
-                                    <a href="deleteevent.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:red; margin:1.35rem">X</a>
+                                    <a href="deleteevent.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:red; ">X</a>
                                     <br>
                                 <?php endif; ?> 
-                                <h7> Name: <?php echo $event[5]?></h7>
+                                <h7 style="white-space: nowrap;"> Name: <?php echo $event[5]?></h7>
                                 <br>
-                                <h7> Location: <?php echo $event[4]?></h7>
+                                <h7 style="white-space: nowrap;"> Location: <?php echo $event[4]?></h7>
                                 <br>
                                 <h7> Time: <?php echo $event[3]?></h7>
                                 <br>
-                                <h7> Project: <?php echo $event[1]?></h7>
+                                <h7 style="white-space: nowrap;"> Project: <?php echo $event[1]?></h7>
                             </div>
                         </div>
                 </div>
@@ -228,8 +228,8 @@
             <h4> Thursday <?php echo $thursday?> </h4>
             <?php foreach($thursdays as $event): ?>
                 <div class="card-columns-fluid">
-                        <div class="card bg-light" style = "width: 17rem; height: 17rem " >
-                            <div class="card-body">
+                        <div class="card bg-light" style = "width: 15rem; height: 15rem " >
+                            <div class="card-body" style="overflow: scroll">
                                 <?php if($userRow["level"] == 1 and $event[8]): ?>
                                     <h7 style="color:red"> Attending! </h7>
                                     <br>
@@ -238,16 +238,16 @@
                                 <br>
                                 <?php if($event[2] == $user_id or $userRow["level"] == 1): ?>
                                     <a href="eventupdate.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:black; border:3px solid;">Edit Meeting</a>
-                                    <a href="deleteevent.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:red; margin:1.35rem">X</a>
+                                    <a href="deleteevent.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:red; ">X</a>
                                     <br>
                                 <?php endif; ?> 
-                                <h7> Name: <?php echo $event[5]?></h7>
+                                <h7 style="white-space: nowrap;"> Name: <?php echo $event[5]?></h7>
                                 <br>
                                 <h7> Location: <?php echo $event[4]?></h7>
                                 <br>
-                                <h7> Time: <?php echo $event[3]?></h7>
+                                <h7 style="white-space: nowrap;"> Time: <?php echo $event[3]?></h7>
                                 <br>
-                                <h7> Project: <?php echo $event[1]?></h7>
+                                <h7 style="white-space: nowrap;"> Project: <?php echo $event[1]?></h7>
                             </div>
                         </div>
                 </div>
@@ -258,8 +258,8 @@
             <h4> Friday <?php echo $friday?> </h4>
             <?php foreach($fridays as $event): ?>
                 <div class="card-columns-fluid">
-                        <div class="card bg-light" style = "width: 17rem; height: 17rem " >
-                            <div class="card-body">
+                        <div class="card bg-light" style = "width: 15rem; height: 15rem " >
+                            <div class="card-body" style="overflow: scroll">
                                 <?php if($userRow["level"] == 1 and $event[8]): ?>
                                     <h7 style="color:red"> Attending! </h7>
                                     <br>
@@ -268,16 +268,16 @@
                                 <br>
                                 <?php if($event[2] == $user_id or $userRow["level"] == 1): ?>
                                     <a href="eventupdate.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:black; border:3px solid;">Edit Meeting</a>
-                                    <a href="deleteevent.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:red; margin:1.35rem">X</a>
+                                    <a href="deleteevent.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:red;">X</a>
                                     <br>
                                 <?php endif; ?> 
-                                <h7> Name: <?php echo $event[5]?></h7>
+                                <h7 style="white-space: nowrap;"> Name: <?php echo $event[5]?></h7>
                                 <br>
                                 <h7> Location: <?php echo $event[4]?></h7>
                                 <br>
-                                <h7> Time: <?php echo $event[3]?></h7>
+                                <h7 style="white-space: nowrap;"> Time: <?php echo $event[3]?></h7>
                                 <br>
-                                <h7> Project: <?php echo $event[1]?></h7>
+                                <h7 style="white-space: nowrap;"> Project: <?php echo $event[1]?></h7>
                             </div>
                         </div>
                 </div>
