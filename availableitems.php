@@ -1,4 +1,5 @@
 <!-- ALL GABE -->
+<!-- This file lists all the items that are availble -->
 <?php
     // Take in global variables passed in from the search bar
     $user_id = $_GET['userid'];

@@ -1,4 +1,5 @@
 <!-- All Allison -->
+<!-- This is the page that allows users to login to their existing accounts --> 
 <?php 
 
 include "db_connection.php";
@@ -46,20 +47,20 @@ include "db_connection.php";
 
 <!DOCTYPE html>
 <html>
-<body>
-<h2>Login Form</h2> 
-<form action="" method="POST">
-  <fieldset>
-    <legend>Login:</legend>
-    
-    Email:<br>
-    <input type="email" name="email">
-    <br>
-    Password:<br>
-    <input type="password" name="password">
-    <br>
-    <input type="submit" name="submit" value="submit">
-  </fieldset>
-</form> 
-</body>
+  <body>
+    <h2>Login Form</h2> 
+    <form action="" method="POST">
+      <fieldset>
+        <legend>Login:</legend>
+        
+        Email:<br>
+        <input type="email" name="email">
+        <br>
+        Password:<br>
+        <input type="password" name="password">
+        <br>
+        <input type="submit" name="submit" value="submit">
+      </fieldset>
+    </form> 
+  </body>
 </html>

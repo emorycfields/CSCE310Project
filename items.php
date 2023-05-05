@@ -1,4 +1,5 @@
 <!-- ALL GABE -->
+<!-- this file lists all of the items that are available in the database --> 
 <?php  
     // Take in global variable passed in from the search bar
     $user_id = $_GET['userid'];
@@ -58,27 +59,27 @@
 <! -- Display all items data -- >
 <div class="container">
     <div class="row-fluid ">
-    <?php while ( $row = mysqli_fetch_array($result) ) : ?>
-        <div class="col-sm-4 ">
-            <div class="card-columns-fluid">
-                <div class="card bg-light" style = "width: 30rem; height: 35rem " >
-                    <div class="card-body">
-                        <h3>Item Name: </h3>
-                                <h4> <?php echo $row['name']?> </h4>
-                        <h3>Description: </h3>
-                                <h4> <?php echo $row['description']?> </h4>
-                        <h3>Cost: $<?php echo $row['cost']?></h3>
-                            <h4>ID: <?php echo $row['item_id']?></h4>
-                            
-                        <! -- If the user is an admin, give the options to edit and delete items via their respective buttons -- >
-                        <?php if($condition) : ?>
-                                <button onclick="window.location.href='edititem.php?item_id=<?php echo $row['item_id']?>&userid=<?php echo $user_id?>'"> EDIT </button>
-                                <button onclick="window.location.href='deleteitem.php?item_id=<?php echo $row['item_id']?>&userid=<?php echo $user_id?>'"> DELETE </button>
-                        <?php endif; ?>
+        <?php while ( $row = mysqli_fetch_array($result) ) : ?>
+            <div class="col-sm-4 ">
+                <div class="card-columns-fluid">
+                    <div class="card bg-light" style = "width: 30rem; height: 35rem " >
+                        <div class="card-body">
+                            <h3>Item Name: </h3>
+                                    <h4> <?php echo $row['name']?> </h4>
+                            <h3>Description: </h3>
+                                    <h4> <?php echo $row['description']?> </h4>
+                            <h3>Cost: $<?php echo $row['cost']?></h3>
+                                <h4>ID: <?php echo $row['item_id']?></h4>
+                                
+                            <! -- If the user is an admin, give the options to edit and delete items via their respective buttons -- >
+                            <?php if($condition) : ?>
+                                    <button onclick="window.location.href='edititem.php?item_id=<?php echo $row['item_id']?>&userid=<?php echo $user_id?>'"> EDIT </button>
+                                    <button onclick="window.location.href='deleteitem.php?item_id=<?php echo $row['item_id']?>&userid=<?php echo $user_id?>'"> DELETE </button>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    <?php endwhile; ?>
+        <?php endwhile; ?>
     </div>
 </div>

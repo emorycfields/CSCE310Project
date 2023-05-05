@@ -1,4 +1,5 @@
 <!-- ALL EMORY -->
+<!-- This file executes the query that deletes a comment from a project -->
 
 <?php
     include "db_connection.php";

@@ -1,4 +1,5 @@
-<! -- ALL GABE -- >
+<!-- ALL GABE -->
+<!-- This file allows the users to add new items to a project -->
 <?php
     // Take in global variables passed in from the search bar
     $item_id = $_GET['item_id'];
