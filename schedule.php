@@ -1,4 +1,6 @@
 <!-- ALL JOHN -->
+<!-- This file creates the calendar view -->
+<!-- It queries the DB to find relevant events to the user and displays them -->
 <?php 
     include "db_connection.php";
 
