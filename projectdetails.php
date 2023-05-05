@@ -72,24 +72,125 @@
 <!-- EMORY END -->
 
 <!-- GABE -->
-<h2 align="center"> Items </h2>
-<a href="newitem.php?userid=<?php echo $user_id?>">
-    <button type="button" class="btn btn-primary" style=" left: 30">
-        <i style="font-size: 2em; " class="glyphicon glyphicon-plus"></i>
-    </button>
-</a>
 
-<div class="col d-flex justify-content-center">
-    <div class="card-columns-fluid mx-auto">
-        <div class="card bg-light" style = "width: 150rem; height: 30rem " >
-            <div class="card-body">
-               
+<! -- ITEMS SECTION GABE -- >
+<?php
+    // Take in global variables passed in from the search bar
+    $var_value = $_GET['proj_id'];
+    $user_id = $_GET['userid'];
+
+    include "db_connection.php";
+
+    // SQL query to select data from database
+    $sql = " SELECT
+                projects.project_id,
+                users.user_id,
+                projects.project_name,
+                users.first_name,
+                users.last_name, 
+                projects.start_date
+            FROM
+                users
+            INNER JOIN projects ON projects.user_id = users.user_id
+            WHERE projects.project_id = $var_value
+            LIMIT 1; ";
+    $result = $conn->query($sql);
+    $result = mysqli_fetch_array($result);
+
+    $sql = " SELECT
+                comment_status.comment_id, 
+                comment_status.description, 
+                comment_status.date, 
+                comment_status.time, 
+                comment_status.approval_status, 
+                users.first_name, 
+                users.last_name
+            FROM
+                comment_status
+            INNER JOIN users on users.user_id = comment_status.user_id
+            WHERE project_id = $var_value;";
+    $result2 = $conn->query($sql);
+
+    // Using a view of a join on the item and item assignment tables to get
+    // the necessary details to show the items within a project
+    $sql = "SELECT
+                item_id,
+                name,
+                description, 
+                total_cost,
+                quantity
+            FROM
+                attached_items
+            WHERE project_id = $var_value;";
+    $result3 = $conn->query($sql);
+
+    // Checking for same manger as user
+    $sql = "SELECT
+                user_id
+            FROM
+                projects
+            Where
+                project_id=$var_value
+            LIMIT 1";
+    $result4 = $conn->query($sql);
+    $row = mysqli_fetch_array($result4);
+    $proj_manager = ($row['user_id']==$user_id);
+    // End Checking for manager == user
+
+    // Checking for admin
+    // Uses index isAdmin in the user table
+    $sql = "SELECT
+        level
+    FROM
+        users
+    Where
+        user_id=$user_id
+    LIMIT 1";
+    $result5 = $conn->query($sql);
+    $row = mysqli_fetch_array($result5);
+    $admin = ($row['level']==1);
+    // End Checking for admin
+?> 
+
+<h2 align="center"> Items </h2>
+<! -- If the user is admin or the manager of the project, allow them to add items to the project via the blue plus sign -- >
+    <?php if($proj_manager or $admin) : ?>
+        <a href="availableitems.php?&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>">
+            <button type="button" class="btn btn-primary" style=" left: 30">
+                <i style="font-size: 2em; " class="glyphicon glyphicon-plus"></i>
+            </button>
+        </a>
+    <?php endif; ?>
+
+<div class="container">
+    <div class="row-fluid ">
+    <! -- For each item in the project displays the name, description, total cost, quantity, and ID on a card -- >
+        <?php while ( $row = mysqli_fetch_array($result3) ) : ?>
+            <div class="col-sm-4 ">
+                <div class="card-columns-fluid">
+                    <div class="card bg-light" style = "width: 30rem; height: 35rem " >
+                        <div class="card-body">
+                            <h3>Item Name: </h3>
+                                <h4> <?php echo $row['name']?> </h4>
+                            <h3>Description: </h3>
+                                <h4> <?php echo $row['description']?> </h4>
+                            <h3>Cost: $<?php echo $row['total_cost']?></h3>
+                                <h4>Quantity: <?php echo $row['quantity']?></h4>
+                                <h4>ID: <?php echo $row['item_id']?></h4>
+                                <! -- If the user is admin or the manager of the project, allow them to remove items from the project or edit the quantity of an item assignment via their respective buttons -- >
+                            <?php if($proj_manager or $admin) : ?>
+                                <button onclick="window.location.href='removeitem.php?item_id=<?php echo $row['item_id']?>&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>'"> REMOVE </button>
+                                <button onclick="window.location.href='editquantity.php?item_id=<?php echo $row['item_id']?>&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>'"> EDIT QUANTITY </button>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
             </div>
+        <?php endwhile; ?>
         </div>
     </div>
-</div>
 
-
+<br>
 <!-- EMORY START  -->
 <!-- (list out all comments in the form of blocks) -->
 <br>

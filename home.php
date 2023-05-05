@@ -57,6 +57,12 @@
                       <h3 align="center">Schedule</h3>
                   </a>
               </div>
+              <!-- ITEMS SECTION GABE -->
+              <div class="card  bg-light" style = "width: 30rem; height: 7rem ">
+                  <a class="card-block stretched-link text-decoration-none" href = "items.php?userid=<?php echo $user_id ?>" style="color:black">
+                      <h3 align="center">Items</h3>
+                  </a>
+                </div>
               <!-- ALLISON: user page button which is only accessible by the admin -->
               <?php if ($row['level'] == 1){?>
               <div class="card bg-light" style = "width: 30rem; height: 7rem ">
@@ -70,3 +76,4 @@
       </div>
   </div>
 </div>
+
