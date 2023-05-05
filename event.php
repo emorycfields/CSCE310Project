@@ -59,7 +59,7 @@ include "db_connection.php";
       if(!empty($_POST["attendees"])) {
         // Loops through each attendee and adds to the event attendee table using the new event_id
         foreach($_POST['attendees'] as $key) {
-          $bridgeSQL = "INSERT INTO `event attendee` (`event_id`, `user_id`) 
+          $bridgeSQL = "INSERT INTO `event_attendee` (`event_id`, `user_id`) 
                 VALUES ('$event', '$key')";
           $bridgeResult = $conn->query($bridgeSQL);
   
