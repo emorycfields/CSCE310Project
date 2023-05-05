@@ -1,13 +1,10 @@
 <?php 
 $user_id = $_GET['userid'];
 $cur_id = $_GET['toedit'];
-echo $cur_id;
-echo $user_id;
 include "db_connection.php";
-    $sql_grab_current = "SELECT * FROM `Users` WHERE `userid`='" .$user_id. "'";
+    $sql_grab_current = "SELECT * FROM `Users` WHERE `user_id`='" .$user_id. "'";
     $result_current = $conn->query($sql_grab_current);
     $row = mysqli_fetch_array($result_current);
-    echo $row['first_name'];
   if (isset($_POST['submit'])) {
 
     $new_supervisor = $_POST['supervisor'];
@@ -22,7 +19,7 @@ include "db_connection.php";
                 `last_name` = '$new_last_name',
                 `level` = '$new_level',
                 `email` = '$new_email'
-            WHERE `userid` = $cur_id;";
+            WHERE `user_id` = $cur_id;";
     
     $result = $conn->query($sql);
     

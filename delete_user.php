@@ -3,10 +3,8 @@
 include "db_connection.php";
   $user_id = $_GET['userid'];
   $delete_user = $_GET['todelete'];
-  //if (isset($_POST['submit'])) {
-    
-    
-    $sql = "DELETE FROM `Users` WHERE `userid`='" .$delete_user. "'";
+        
+    $sql = "DELETE FROM `Users` WHERE `user_id`='" .$delete_user. "'";
     
     $result = $conn->query($sql);
     
@@ -22,7 +20,5 @@ include "db_connection.php";
       echo "Error:". $sql . "<br>". $conn->error;
     }
     $conn->close();
-  //}
-
 ?> 
 

@@ -60,16 +60,16 @@
                 <?php while( $users = mysqli_fetch_assoc($result) ) { 
 
                     ?>
-                <tr id="<?php echo $users ['userid']; ?>">
-                <td><?php echo $users ['userid']; ?></td>
+                <tr id="<?php echo $users ['user_id']; ?>">
+                <td><?php echo $users ['user_id']; ?></td>
                 <td><?php echo $users ['SupFirst']; ?> <?php echo $users ['SupLast']; ?></td>
-                <td><?php echo $users ['firstname']; ?></td>
-                <td><?php echo $users ['lastname']; ?></td>  
+                <td><?php echo $users ['first_name']; ?></td>
+                <td><?php echo $users ['last_name']; ?></td>  
                 <td><?php echo $users ['level']; ?></td>  
                 <td><?php echo $users ['email']; ?></td>
                 <td>
-                    <a href="delete_user.php?userid=<?php echo $user_id?>&todelete=<?php echo $users['userid']?>">Delete</a>
-                    <a href="updateuser.php?userid=<?php echo $user_id?>&toedit=<?php echo $users['userid']?>">Edit</a>
+                    <a href="delete_user.php?userid=<?php echo $user_id?>&todelete=<?php echo $users['user_id']?>">Delete</a>
+                    <a href="updateuser.php?userid=<?php echo $user_id?>&toedit=<?php echo $users['user_id']?>">Edit</a>
                 </td> 				   				   				  
                 </tr>
                 <?php } ?>

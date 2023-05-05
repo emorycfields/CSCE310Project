@@ -1,12 +1,10 @@
 <?php 
 $user_id = $_GET['userid'];
 
-echo $user_id;
 include "db_connection.php";
-    $sql_grab_current = "SELECT * FROM `Users` WHERE `userid`='" .$user_id. "'";
+    $sql_grab_current = "SELECT * FROM `Users` WHERE `user_id`='" .$user_id. "'";
     $result_current = $conn->query($sql_grab_current);
     $row = mysqli_fetch_array($result_current);
-    echo $row['firstname'];
   if (isset($_POST['submit'])) {
 
     $new_supervisor = $_POST['supervisor'];
@@ -18,12 +16,12 @@ include "db_connection.php";
     
     $sql = "UPDATE `Users` SET 
                 `supervisor` = '$new_supervisor',
-                `firstname` = '$new_first_name',
-                `lastname` = '$new_last_name',
+                `first_name` = '$new_first_name',
+                `last_name` = '$new_last_name',
                 `level` = '$new_level',
                 `email` = '$new_email',
                 `password` = '$new_password'
-            WHERE `userid` = $user_id;";
+            WHERE `user_id` = $user_id;";
     
     $result = $conn->query($sql);
     
@@ -37,6 +35,7 @@ include "db_connection.php";
     $conn->close();
   } 
 ?> 
+
 
 
 <!DOCTYPE html>
@@ -55,10 +54,10 @@ include "db_connection.php";
     <input type="text" name="supervisor" value="<?php echo $row['supervisor'];?>">
     <br>
     First name:<br>
-    <input type="text" name="firstname" value="<?php echo $row['firstname'];?>">
+    <input type="text" name="firstname" value="<?php echo $row['first_name'];?>">
     <br>
     Last name:<br>
-    <input type="text" name="lastname" value="<?php echo $row['lastname'];?>">
+    <input type="text" name="lastname" value="<?php echo $row['last_name'];?>">
     <br>
     Level:<br>
     <input type="text" name="level" value="<?php echo $row['level'];?>">

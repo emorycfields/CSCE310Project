@@ -2,10 +2,15 @@
     date_default_timezone_set('America/Chicago');
     $proj_id = $_GET['proj_id'];
     $comment_id = $_GET['comment_id'];
+    $user_id = $_GET['userid'];
 
     include "db_connection.php";
+
+    $sql_grab_current = "SELECT * FROM `comment_status` WHERE `comment_id`='" .$comment_id. "'";
+    $result_current = $conn->query($sql_grab_current);
+    $row = mysqli_fetch_array($result_current);
+
     if (isset($_POST['submit'])) {
-        $user_id = $_POST['user_id'];
         $project_id = $proj_id;
         $time = date("h:i:s");
         $date = date("Y-m-d");
@@ -26,7 +31,7 @@
         
         if ($result == TRUE) {
             echo "comment updated successfully.";
-            header("Location: projectdetails.php?proj_id=$proj_id");
+            header("Location: projectdetails.php?proj_id=$proj_id&userid=$user_id");
         }else{
             echo "Error:". $sql . "<br>". $conn->error;
         }
@@ -34,42 +39,32 @@
   } 
 ?> 
 
-
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
-        <a href="home.php">
+        <a href="home.php?userid=<?php echo $user_id?>">
             <button type="button" class="btn btn-primary" style="position:absolute; top:0; right:0;">
                 <i style="font-size: 2em; " class="glyphicon glyphicon-home"></i>
             </button>
         </a>
-        <h1 align="center"> Update Comment & Status </h1>
-        </head>
-
+        <h1 align="center"> Add New Comment & Status </h1>
         <br>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
-        <a href="home.php">
-            <button type="button" class="btn btn-primary" style="position:absolute; top:0; right:0;">
-                <i style="font-size: 2em; " class="glyphicon glyphicon-home"></i>
-            </button>
-        </a>
+    </head>
 </html>
+
+
 
 
 <html>
     <body style="text-align: center;"> 
         <form action="" method="POST">
             <fieldset>
-                user_id:<br>
-                <input type="text" name="user_id">
-                <br>
                 Comment:<br>
-                <input type="text" name="comment" size="200">
+                <input type="text" name="comment" size="200" value="<?php echo $row['description'];?>">>
                 <br>
                 Status:<br>
-                <select name="status">
+                <select name="status" value="<?php echo $row['approval_status'];?>">>
                     <option value="Not Started">Not Started</option>
                     <option value="In Progress">In progress</option>
                     <option value="Blocked">Blocked</option>
