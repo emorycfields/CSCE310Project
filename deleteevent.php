@@ -1,4 +1,6 @@
 <!-- ALL JOHN -->
+<!-- This file deletes an event from the DB on a button click -->
+<!-- The file also deletes the corresponding event attendee entries -->
 <?php 
 
 include "db_connection.php";
