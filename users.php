@@ -3,17 +3,7 @@
 
     $user_id = $_GET["userid"];
    
-    $sql = "SELECT
-            user1.user_id, 
-            supervisorname.first_name as SupFirst,
-            supervisorname.last_name as SupLast,
-            user1.first_name, 
-            user1.last_name,
-            user1.level,
-            user1.email
-        FROM
-            users AS user1
-        LEFT JOIN users AS supervisorname on user1.supervisor = supervisorname.user_id;";
+    $sql = "SELECT * from user_sup_name;";
     
     $result = $conn->query($sql);
 
