@@ -17,7 +17,7 @@ $sql = "DELETE FROM `events` WHERE `event_id` = $event_id";
 $result = $conn->query($sql);
 
 // Deletes all associated entries in the event attendee table
-$deleteBridge = "DELETE FROM `event attendee` WHERE `event_id` = $event_id";
+$deleteBridge = "DELETE FROM `event_attendee` WHERE `event_id` = $event_id";
 $bridgeResult = $conn->query($deleteBridge);
 
 if ($bridgeResult != TRUE) {

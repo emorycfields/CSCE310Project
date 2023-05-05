@@ -141,7 +141,7 @@
                                     <br>
                                 <?php endif; ?>
                                 <!-- Combines the first and last names -->
-                                <small>Creator: <?php echo $event[6]?>  <?php echo " "?> <?php echo $event[7]?></small>
+                                <small style="white-space: nowrap;">Creator: <?php echo $event[6]?>  <?php echo " "?> <?php echo $event[7]?></small>
                                 <br>
                                 <!-- Creates the edit and delete buttons for events that the user created.
                                 Admins have these buttons for every event -->
@@ -174,7 +174,7 @@
                                     <h7 style="color:red"> Attending! </h7>
                                     <br>
                                 <?php endif; ?>
-                                <small>Creator: <?php echo $event[6]?>  <?php echo " "?> <?php echo $event[7]?></small>
+                                <small style="white-space: nowrap;">Creator: <?php echo $event[6]?>  <?php echo " "?> <?php echo $event[7]?></small>
                                 <br>
                                 <?php if($event[2] == $user_id or $userRow["level"] == 1): ?>
                                     <a href="eventupdate.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:black; border:3px solid;">Edit Meeting</a>
@@ -204,7 +204,7 @@
                                     <h7 style="color:red"> Attending! </h7>
                                     <br>
                                 <?php endif; ?>
-                                <small>Creator: <?php echo $event[6]?>  <?php echo " "?> <?php echo $event[7]?></small>
+                                <small style="white-space: nowrap;">Creator: <?php echo $event[6]?>  <?php echo " "?> <?php echo $event[7]?></small>
                                 <br>
                                 <?php if($event[2] == $user_id or $userRow["level"] == 1): ?>
                                     <a href="eventupdate.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:black; border:3px solid;">Edit Meeting</a>
@@ -234,7 +234,7 @@
                                     <h7 style="color:red"> Attending! </h7>
                                     <br>
                                 <?php endif; ?>
-                                <small>Creator: <?php echo $event[6]?>  <?php echo " "?> <?php echo $event[7]?></small>
+                                <small style="white-space: nowrap;">Creator: <?php echo $event[6]?>  <?php echo " "?> <?php echo $event[7]?></small>
                                 <br>
                                 <?php if($event[2] == $user_id or $userRow["level"] == 1): ?>
                                     <a href="eventupdate.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:black; border:3px solid;">Edit Meeting</a>
@@ -264,7 +264,7 @@
                                     <h7 style="color:red"> Attending! </h7>
                                     <br>
                                 <?php endif; ?>
-                                <small>Creator: <?php echo $event[6]?>  <?php echo " "?> <?php echo $event[7]?></small>
+                                <small style="white-space: nowrap;">Creator: <?php echo $event[6]?>  <?php echo " "?> <?php echo $event[7]?></small>
                                 <br>
                                 <?php if($event[2] == $user_id or $userRow["level"] == 1): ?>
                                     <a href="eventupdate.php?event_id=<?php echo $event[0] ?>&userid=<?php echo $user_id ?>" style="color:black; border:3px solid;">Edit Meeting</a>
