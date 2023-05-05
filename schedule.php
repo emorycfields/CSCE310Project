@@ -37,7 +37,7 @@
     $sql = " SELECT events.event_id, events.date, events.location, events.name, events.project_id, events.time, events.user_id FROM events INNER JOIN `event attendee` ON `event attendee`.event_id = events.event_id WHERE `event attendee`.user_id = $user_id";
     // If the user is an admin, they can see every event
     if ($userRow["level"] == 1) {
-        $sql = "SELECT * from allEvents";
+        $sql = "SELECT * from events";
     }
     $result = $conn->query($sql);
 
