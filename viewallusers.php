@@ -1,8 +1,10 @@
+<!-- EMORY --> 
 <?php 
     $project_id = $_GET['proj_id'];
     $userid = $_GET['userid'];
 
     include "db_connection.php";
+    // get all users that are not already assigned to the current table
     $sql = "SELECT 
                 users.user_id, 
                 users.supervisor, 
@@ -23,6 +25,7 @@
   
 ?> 
 
+<!-- standard header including home button and title --> 
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -39,7 +42,8 @@
 
 
 <html>
-    
+
+<!-- list out all the users not currently in the project and include a button to add the user to the project --> 
 <body style="text-align: center;">
     <div>
         <table id="editableTable" class="table table-bordered">

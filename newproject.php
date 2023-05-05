@@ -1,8 +1,10 @@
+<!-- EMORY -->
 <?php 
 
   include "db_connection.php";
   $userid = $_GET['userid'];
 
+  // insert new project into projects table when form is submitted
   if (isset($_POST['submit'])) {
     $user_id = $_POST['user_id'];
     $project_name = $_POST['project_name'];
@@ -13,16 +15,15 @@
     
     $result = $conn->query($sql);
     
+    // navigate back to the projects page 
     if ($result == TRUE) {
-      echo "New project created successfully.";
       header("Location: projects.php?userid=$userid");
-    }else{
-      echo "Error:". $sql . "<br>". $conn->error;
     }
     $conn->close();
   } 
 ?> 
 
+<!-- basic header -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,11 +39,25 @@
     <h1 align="left"> Create a New Project </h1>  
 </head>
 
+<!-- form for inputting a new project -->
 <body style="text-align: center;"> 
 <form action="" method="POST">
   <fieldset>
-    Project Manager ID:<br>
-    <input type="text" name="user_id">
+    Project Manager:<br>
+      <select name="user_id">
+        <!-- Queries the database for available users, displaying all in a dropdown -->
+        <?php 
+        $sql = mysqli_query($conn, "SELECT first_name, last_name, user_id FROM users");
+        while ($row = $sql->fetch_assoc()){
+          unset($first_name, $last_name, $user_id);
+          $id = $row['user_id'];
+          $first_name = $row['first_name']; 
+          $last_name = $row['last_name']; 
+          // Displays the user name but stores the user id when selected
+          echo '<option value="'.$id.'">'.$first_name.' '.$last_name.'</option>';
+        }
+        ?>
+      </select>
     <br>
     Project Name:<br>
     <input type="text" name="project_name">

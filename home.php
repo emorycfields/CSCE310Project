@@ -1,3 +1,4 @@
+<!-- EMORY AND JOHN -->
 <?php 
   $user_id = $_GET['userid'];
   include "db_connection.php";
@@ -23,18 +24,23 @@
 </head>
 </html>
 
+<!-- ALLISON: update profile button to be used by all users -->
 <a href="updateprofile.php?userid=<?php echo $user_id ?>">
     <button type="button" class="btn btn-primary" style="position:absolute; top:0; left:0;">
         Edit Profile
     </button>
 </a>
+<!-- END ALLISON -->
 
+<!-- ALLISON: logout button -->
 <a href="login.php">
     <button type="button" class="btn btn-primary" style="position:absolute; top:0; right:0;">
         Logout
     </button>
 </a>
+<!-- END ALLISON -->
 
+<!-- EMORY (options on the home page) -->
 </head>
 </html>
 <div class="d-flex flex-grow-1 justify-content-center align-items-center">
@@ -51,13 +57,15 @@
                       <h3 align="center">Schedule</h3>
                   </a>
               </div>
-              <?php if ($row['level'] == 1){?>
+             <!-- ALLISON: user page button which is only accessible by the admin -->
+             <?php if ($row['level'] == 1){?>
               <div class="card bg-light" style = "width: 30rem; height: 7rem ">
                   <a class="card-block stretched-link text-decoration-none" href = "users.php?userid=<?php echo $user_id ?>" style="color:black">
                       <h3 align="center" >Users</h3>
                   </a>
                <?php }?>
               </div>
+              <!-- END ALLISON -->
           </div>
       </div>
   </div>

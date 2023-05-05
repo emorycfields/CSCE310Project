@@ -1,18 +1,23 @@
+<!-- EMORY AND GABE -->
 <?php
+
+    // EMORY start 
+    // get the results from the url
     $var_value = $_GET['proj_id'];
     $user_id = $_GET['userid'];
 
     include "db_connection.php";
 
-    // SQL query to select data from database
+    // select project information for the specified project_id
     $sql = " SELECT
                 *
             FROM projects_users
             WHERE project_id = $var_value
             LIMIT 1; ";
-    $result = $conn->query($sql);
-    $result = mysqli_fetch_array($result);
-
+    $project_result = $conn->query($sql);
+    $project_result = mysqli_fetch_array($project_result);
+    
+    // select the comments & the user information for their author
     $sql = " SELECT
                 comment_status.comment_id, 
                 comment_status.description, 
@@ -28,8 +33,9 @@
                 comment_status
             INNER JOIN users on users.user_id = comment_status.user_id
             WHERE project_id = $var_value;";
-    $result2 = $conn->query($sql);
+    $comment_result = $conn->query($sql);
 
+    // select the users assigned to the specified project
     $sql = " SELECT
                 users.first_name, 
                 users.last_name, 
@@ -41,23 +47,21 @@
                 `project assignments`
             INNER JOIN users on users.user_id = `project assignments`.user_id
             WHERE `project assignments`.project_id = $var_value;";
-    $result3 = $conn->query($sql);
+    $assigned_users = $conn->query($sql);
 
+    // select the level and id of the current user
     $sql = " SELECT
-                user_id,
-                first_name, 
-                last_name, 
                 user_id, 
-                supervisor,
-                level, 
-                email
+                level
             FROM
                 `users`
             WHERE `users`.user_id = $user_id;";
-    $result4 = $conn->query($sql);
-    $result4 = mysqli_fetch_array($result4);
+    $user_result = $conn->query($sql);
+    $user_result = mysqli_fetch_array($user_result);
 ?> 
 
+
+<!-- general header including the home button -->
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -68,13 +72,15 @@
             </button>
         </a>
         <h1 align="center"> Project Details </h1>
-        <span style="font-size: 2.5em;" align="left"> Project Name: </span> <span style="font-size: 1.5em;"> <?php echo $result['project_name']?> </span>
+        <span style="font-size: 2.5em;" align="left"> Project Name: </span> <span style="font-size: 1.5em;"> <?php echo $project_result['project_name']?> </span>
         <br>
-        <span style="font-size: 2.5em;" align="left"> Project Manager: </span> <span style="font-size: 1.5em;"> <?php echo $result['first_name']?> <?php echo $result['last_name']?> </span>
+        <span style="font-size: 2.5em;" align="left"> Project Manager: </span> <span style="font-size: 1.5em;"> <?php echo $project_result['first_name']?> <?php echo $project_result['last_name']?> </span>
         <br>
     </head>
 </html>
+<!-- EMORY END -->
 
+<!-- GABE -->
 <h2 align="center"> Items </h2>
 <a href="newitem.php?userid=<?php echo $user_id?>">
     <button type="button" class="btn btn-primary" style=" left: 30">
@@ -92,9 +98,13 @@
     </div>
 </div>
 
+
+<!-- EMORY START  -->
+<!-- (list out all comments in the form of blocks) -->
 <br>
 <h2 align="center"> Comments/Statuses </h2>
 
+<!-- provide the button to add a new comment to the project --> 
 <a href="newcomment.php?proj_id=<?php echo $var_value ?>&userid=<?php echo $user_id?>">
     <button type="button" class="btn btn-primary" >
         <i style="font-size: 2em; " class="glyphicon glyphicon-plus"></i>
@@ -103,7 +113,7 @@
 
 <div class="container">
     <div class="row-fluid ">
-        <?php while ( $row = mysqli_fetch_array($result2) ) : ?>
+        <?php while ( $row = mysqli_fetch_array($comment_result) ) : ?>
             <div class="col-sm-4 ">
                 <div class="card-columns-fluid">
                     <div class="card bg-light" style = "width: 30rem; height: 35rem " >
@@ -115,7 +125,8 @@
                             <br>
                             <h4>Author: <?php echo $row['first_name']?>  <?php echo $row['last_name']?></h4>
                             <h4><?php echo $row['time']?> <?php echo $row['date']?> </h4>
-                            <?php if ($result4['level'] == 1 || $result4['user_id'] == $row['user_id']){?>
+                            <!-- provide option to edit/delete if admin or owner of comment -->
+                            <?php if ($user_result['level'] == 1 || $user_result['user_id'] == $row['user_id']){?>
                                 <button onclick="window.location.href='deletecomment.php?comment_id=<?php echo $row['comment_id']?>&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>'"> DELETE </button>
                                 <button onclick="window.location.href='editcomment.php?comment_id=<?php echo $row['comment_id']?>&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>'"> EDIT </button>
                             <?php }?>
@@ -129,8 +140,10 @@
 <br>
 
 
+<!-- List out all users that are a part of the current project -->
 <h2 align="center"> Users </h2>
 
+<!-- provide the button to add a new user to a project --> 
 <a href="viewallusers.php?proj_id=<?php echo $var_value ?>&userid=<?php echo $user_id?>">
     <button type="button" class="btn btn-primary" >
         <i style="font-size: 2em; " class="glyphicon glyphicon-plus"></i>
@@ -152,7 +165,7 @@
         </thead>
         <a href = "projects.php" >
             <tbody>
-                <?php while( $users = mysqli_fetch_assoc($result3) ) { ?>
+                <?php while( $users = mysqli_fetch_assoc($assigned_users) ) { ?>
                 <tr id="<?php echo $users ['user_id']; ?>">
                 <td><?php echo $users ['user_id']; ?></td>
                 <td><?php echo $users ['supervisor']; ?></td>
@@ -160,6 +173,7 @@
                 <td><?php echo $users ['last_name']; ?></td>  
                 <td><?php echo $users ['level']; ?></td>  
                 <td><?php echo $users ['email']; ?></td>
+                <!-- provide option to delete user from the project --> 
                 <td>
                     <a href="deleteuserfromproject.php?todelete=<?php echo $users['user_id']?>&proj_id=<?php echo $var_value?>&userid=<?php echo $user_id?>">Delete</a>
                 </td> 				   				   				  
