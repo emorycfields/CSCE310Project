@@ -7,12 +7,7 @@
 
     // Obtain the user level to determine admin privileges
     // Can utilize the isAdmin index, which consists of level and user_id
-    $user_sql = "SELECT 
-                    users.level 
-                FROM 
-                    users 
-                WHERE users.user_id = $user_id 
-                LIMIT 1;";
+    $user_sql = "SELECT users.level FROM users WHERE users.user_id = $user_id LIMIT 1";
     $user = $conn->query($user_sql);
     $userRow = mysqli_fetch_array($user);
 
@@ -37,7 +32,7 @@
     $sql = " SELECT events.event_id, events.date, events.location, events.name, events.project_id, events.time, events.user_id FROM events INNER JOIN `event attendee` ON `event attendee`.event_id = events.event_id WHERE `event attendee`.user_id = $user_id";
     // If the user is an admin, they can see every event
     if ($userRow["level"] == 1) {
-        $sql = "SELECT * from allEvents";
+        $sql = " SELECT * from events";
     }
     $result = $conn->query($sql);
 
@@ -56,13 +51,13 @@
 
         // Convert the project id into a displayable name
         $project_id = $row["project_id"];
-        $project_sql = "SELECT project_name FROM projects WHERE projects.project_id = $project_id LIMIT 1";
+        $project_sql = "SELECT project_name FROM projecttitle WHERE projecttitle.project_id = $project_id LIMIT 1";
         $project = $conn->query($project_sql);
         $projRow = mysqli_fetch_array($project);
 
         // Convert the user id into a displayable name
         $maker_id = $row["user_id"];
-        $maker_sql = "SELECT first_name, last_name FROM users WHERE users.user_id = $maker_id LIMIT 1";
+        $maker_sql = "SELECT first_name, last_name FROM username WHERE username.user_id = $maker_id LIMIT 1";
         $maker = $conn->query($maker_sql);
         $makerRow = mysqli_fetch_array($maker);
 
