@@ -1,4 +1,7 @@
 <!-- ALL JOHN -->
+<!-- This file inserts an event into the DB -->
+<!-- The file queries the DB to get possible projects / users to associate to the event -->
+<!-- The file also inserts the corresponding event attendee entries -->
 <?php 
 include "db_connection.php";
   $user_id = $_GET['userid'];
@@ -59,7 +62,7 @@ include "db_connection.php";
       if(!empty($_POST["attendees"])) {
         // Loops through each attendee and adds to the event attendee table using the new event_id
         foreach($_POST['attendees'] as $key) {
-          $bridgeSQL = "INSERT INTO `event attendee` (`event_id`, `user_id`) 
+          $bridgeSQL = "INSERT INTO `event_attendee` (`event_id`, `user_id`) 
                 VALUES ('$event', '$key')";
           $bridgeResult = $conn->query($bridgeSQL);
   

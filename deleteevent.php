@@ -1,4 +1,6 @@
 <!-- ALL JOHN -->
+<!-- This file deletes an event from the DB on a button click -->
+<!-- The file also deletes the corresponding event attendee entries -->
 <?php 
 
 include "db_connection.php";
@@ -17,7 +19,7 @@ $sql = "DELETE FROM `events` WHERE `event_id` = $event_id";
 $result = $conn->query($sql);
 
 // Deletes all associated entries in the event attendee table
-$deleteBridge = "DELETE FROM `event attendee` WHERE `event_id` = $event_id";
+$deleteBridge = "DELETE FROM `event_attendee` WHERE `event_id` = $event_id";
 $bridgeResult = $conn->query($deleteBridge);
 
 if ($bridgeResult != TRUE) {

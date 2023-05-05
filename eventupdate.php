@@ -1,4 +1,7 @@
 <!-- ALL JOHN -->
+<!-- This file updates an event into the DB -->
+<!-- The file queries the DB to get possible projects / users to associate to the event -->
+<!-- The file also updates the corresponding event attendee entries via deletion / insertion -->
 <?php 
 include "db_connection.php";
   $user_id = $_GET['userid'];
@@ -39,11 +42,11 @@ include "db_connection.php";
     // It doesn't make sense to update specific entries bc the number of entries related to an event may have changed
     if(!empty($_POST["attendees"])) {
       // Deletes the previous instances associated with the event
-      $deleteSQL = "DELETE FROM `event attendee` WHERE `event_id` = $event_id";
+      $deleteSQL = "DELETE FROM `event_attendee` WHERE `event_id` = $event_id";
       $deleteResult = $conn->query($deleteSQL);
       foreach($_POST['attendees'] as $key) {
         // Creates new instances based on the new selection
-        $bridgeSQL = "INSERT INTO `event attendee`(`event_id`, `user_id`) 
+        $bridgeSQL = "INSERT INTO `event_attendee`(`event_id`, `user_id`) 
               VALUES ('$event_id', '$key')";
         $bridgeResult = $conn->query($bridgeSQL);
 
