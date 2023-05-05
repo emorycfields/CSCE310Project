@@ -5,6 +5,8 @@ include "db_connection.php";
     $sql_grab_current = "SELECT * FROM `Users` WHERE `user_id`='" .$cur_id. "'";
     $result_current = $conn->query($sql_grab_current);
     $row = mysqli_fetch_array($result_current);
+
+    
   if (isset($_POST['submit'])) {
 
     $new_supervisor = $_POST['supervisor'];
@@ -54,7 +56,12 @@ include "db_connection.php";
           $first_name = $users['first_name']; 
           $last_name = $users['last_name']; 
           // Displays the user name but stores the user id when selected
-          echo '<option value="'.$id.'">'.$first_name.' '.$last_name.'</option>';
+          // displays the current supervisor as current selected value
+          if ($id == $row['supervisor']) {
+            echo '<option value="'.$id.'" selected>'.$first_name.' '.$last_name.'</option>';
+          } else {
+            echo '<option value="'.$id.'">'.$first_name.' '.$last_name.'</option>';
+          }
         }
         ?>
       </select>
