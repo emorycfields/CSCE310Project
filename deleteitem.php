@@ -1,4 +1,5 @@
-<! -- ALL GABE -- >
+<!-- ALL GABE -->
+<!-- This file executes a query that deletes an item from the database -->
 <?php
     // Take in global variables passed in from the search bar
     $item_id = $_GET['item_id'];

@@ -1,9 +1,16 @@
+<!-- All Emory -->
+<!-- this page holds the interface and query for inserting a new comment for a project --> 
 <?php 
+    include "db_connection.php";
+
+    // set timezone
     date_default_timezone_set('America/Chicago');
+
+    // get variables from the url
     $proj_id = $_GET['proj_id'];
     $user_id = $_GET['userid'];
 
-    include "db_connection.php";
+    // insert into table when form is submitted
     if (isset($_POST['submit'])) {
         $project_id = $proj_id;
         $time = date("h:i:s");
@@ -16,16 +23,15 @@
         
         $result = $conn->query($sql);
         
+        // navigate back to the projectdetails page
         if ($result == TRUE) {
-        echo "New project created successfully.";
         header("Location: projectdetails.php?proj_id=$proj_id&userid=$user_id");
-        }else{
-        echo "Error:". $sql . "<br>". $conn->error;
         }
         $conn->close();
   } 
 ?> 
 
+<!-- general header including home page and title-->
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -40,25 +46,25 @@
     </head>
 </html>
 
-
+<!-- create form for making a new table -->
 <body style="text-align: center;"> 
-<form action="" method="POST">
-  <fieldset>
-    Comment:<br>
-    <input type="text" name="comment" size="200">
-    <br>
-    Status:<br>
-    <select name="status">
-        <option value="Not Started">Not Started</option>
-        <option value="In Progress">In progress</option>
-        <option value="Blocked">Blocked</option>
-        <option value="Completed">Completed </option>
-    </select>
-    <br>
+    <form action="" method="POST">
+    <fieldset>
+        Comment:<br>
+        <input type="text" name="comment" size="200">
+        <br>
+        Status:<br>
+        <select name="status">
+            <option value="Not Started">Not Started</option>
+            <option value="In Progress">In progress</option>
+            <option value="Blocked">Blocked</option>
+            <option value="Completed">Completed </option>
+        </select>
+        <br>
 
-    <br>
+        <br>
 
-    <input type="submit" name="submit" value="submit">
-  </fieldset>
-</form> 
+        <input type="submit" name="submit" value="submit">
+    </fieldset>
+    </form> 
 </body>

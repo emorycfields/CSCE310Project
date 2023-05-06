@@ -1,3 +1,5 @@
+<!-- Everyone --> 
+<!-- This is used on other pages to establish the database connection --> 
 <?php
     $servername = "localhost";
     $username = "root";
@@ -8,4 +10,3 @@
         die("Connection Failed" . $conn->connect_error);
     }
 ?>
-    

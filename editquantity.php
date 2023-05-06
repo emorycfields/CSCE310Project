@@ -1,4 +1,5 @@
-<! -- ALL GABE -- >
+<!-- ALL GABE -->
+<!-- This file allows users to update the quantity of an item --> 
 <?php
     // Take in global variables passed in from the search bar
     $item_id = $_GET['item_id'];
@@ -52,7 +53,7 @@
     }
 ?>
 
-<! -- HOME BUTTON -- >
+<!-- HOME BUTTON -->
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -67,7 +68,7 @@
     </head>
 </html>
 
-<! -- Display item data -- >
+<!-- Display item data -->
 <div class="container">
     <div class="row-fluid ">
         <div class="col-sm-4 ">

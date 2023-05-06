@@ -1,4 +1,5 @@
-<! -- ALL GABE -- >
+<!-- ALL GABE -->
+<!-- This file provides the query and interface that allows a user to update an existing item --> 
 <?php 
     // Take in global variables passed in from the search bar
     $item_id = $_GET['item_id'];
@@ -40,35 +41,35 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <! -- Home Button-- >
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
-        <a href="home.php?userid=<?php echo $user_id?>">
-            <button type="button" class="btn btn-primary" style="position:absolute; top:0; right:0;">
-                <i style="font-size: 2em; " class="glyphicon glyphicon-home"></i>
-            </button>
-        </a>
-    <h1 align="left"> Create a New Item </h1>  
-</head>
+  <head>
+      <! -- Home Button-- >
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
+          <a href="home.php?userid=<?php echo $user_id?>">
+              <button type="button" class="btn btn-primary" style="position:absolute; top:0; right:0;">
+                  <i style="font-size: 2em; " class="glyphicon glyphicon-home"></i>
+              </button>
+          </a>
+      <h1 align="left"> Create a New Item </h1>  
+  </head>
 
-<! -- Input Fields -- >
-<body style="text-align: center;"> 
-<form action="" method="POST">
-  <fieldset>
-    Item Name:<br>
-    <input type="text" name="name">
-    <br>
-    Item Description:<br>
-    <input type="text" name="description">
-    <br>
-    Item Cost:<br>
-    <input type="" name="cost">
-    <br> 
-    <input type="submit" name="submit" value="submit">
-  </fieldset>
-</form> 
-</body>
+  <! -- Input Fields -- >
+  <body style="text-align: center;"> 
+    <form action="" method="POST">
+      <fieldset>
+        Item Name:<br>
+        <input type="text" name="name">
+        <br>
+        Item Description:<br>
+        <input type="text" name="description">
+        <br>
+        Item Cost:<br>
+        <input type="" name="cost">
+        <br> 
+        <input type="submit" name="submit" value="submit">
+      </fieldset>
+    </form> 
+  </body>
 </html>

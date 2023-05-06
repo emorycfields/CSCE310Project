@@ -1,4 +1,5 @@
-<! -- ALL GABE -->
+<!-- ALL GABE -->
+<!-- This file allows the user to create a new item in the database --> 
 <?php 
     // Take in global variable passed in from the search bar
     $user_id = $_GET['userid'];
@@ -45,19 +46,19 @@
 
 <! -- Input Fields -- >
 <body style="text-align: center;"> 
-<form action="" method="POST">
-  <fieldset>
-    Item Name:<br>
-    <input type="text" name="name">
-    <br>
-    Item Description:<br>
-    <input type="text" name="description">
-    <br>
-    Item Cost:<br>
-    <input type="" name="cost">
-    <br> 
-    <input type="submit" name="submit" value="submit">
-  </fieldset>
-</form> 
+  <form action="" method="POST">
+    <fieldset>
+      Item Name:<br>
+      <input type="text" name="name">
+      <br>
+      Item Description:<br>
+      <input type="text" name="description">
+      <br>
+      Item Cost:<br>
+      <input type="" name="cost">
+      <br> 
+      <input type="submit" name="submit" value="submit">
+    </fieldset>
+  </form> 
 </body>
 </html>

@@ -1,7 +1,9 @@
+<!-- EMORY --> 
+<!-- this page lists all of the projects in the database --> 
 <?php
     include "db_connection.php";
     $user_id = $_GET['userid'];
-    // SQL query to select data from database
+    // SQL query to get project information and user information for the manager of the project
     $sql = " SELECT
                 projects.project_id,
                 users.user_id,
@@ -15,6 +17,7 @@
     $result = $conn->query($sql);
 ?> 
 
+<!-- standard header including home button and title --> 
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -35,31 +38,31 @@
     </head>
 </html>
 
-
+<!-- list the information about the each project in the DB --> 
 <div class="container">
     <div class="row-fluid ">
-    <?php while ( $row = mysqli_fetch_array($result) ) : ?>
-        <div class="col-sm-4 ">
-            <div class="card-columns-fluid">
-                <div class="card bg-light" style = "width: 30rem; height: 30rem " >
-                    <div class="card-body">
-                        <a class="card-block stretched-link text-decoration-none" href="projectdetails.php?proj_id=<?php echo $row['project_id'] ?>&userid=<?php echo $user_id ?>" style="color:black">
-                            <h3> Project: </h3>
-                            <h4>Name: <?php echo $row['project_name']?> <br> ID: <?php echo $row['project_id']?></h4> 
-                            <h3>  Manager: </h3>
-                            <h4>
-                                <?php echo $row['first_name']?>
-                                <?php echo $row['last_name']?>
-                            </h4> 
-                            <h3>  Start Date: </h3>
-                            <h4>
-                                <?php echo $row['start_date']?>
-                            </h4> 
-                        </a>
+        <?php while ( $row = mysqli_fetch_array($result) ) : ?>
+            <div class="col-sm-4 ">
+                <div class="card-columns-fluid">
+                    <div class="card bg-light" style = "width: 30rem; height: 30rem " >
+                        <div class="card-body">
+                            <a class="card-block stretched-link text-decoration-none" href="projectdetails.php?proj_id=<?php echo $row['project_id'] ?>&userid=<?php echo $user_id ?>" style="color:black">
+                                <h3> Project: </h3>
+                                <h4>Name: <?php echo $row['project_name']?> <br> ID: <?php echo $row['project_id']?></h4> 
+                                <h3>  Manager: </h3>
+                                <h4>
+                                    <?php echo $row['first_name']?>
+                                    <?php echo $row['last_name']?>
+                                </h4> 
+                                <h3>  Start Date: </h3>
+                                <h4>
+                                    <?php echo $row['start_date']?>
+                                </h4> 
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    <?php endwhile; ?>
+        <?php endwhile; ?>
     </div>
 </div>

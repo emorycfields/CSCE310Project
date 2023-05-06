@@ -1,4 +1,5 @@
-<! -- ALL GABE -- >
+<!-- ALL GABE -->
+<!-- This file executes the query that removes an item from a project --> 
 <?php
     // Take in global variables passed in from the search bar
     $item_id = $_GET['item_id'];
